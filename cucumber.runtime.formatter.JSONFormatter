@@ -1,0 +1,1660 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing GrandChildPlus Parameters",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 988969896,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined for GrandChildPlus Parameters",
+            "match": {
+              "location": "GrandChildPlusScenarios.theTestEnvironmentIsDefinedForGrandChildPlusParameters(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1033726,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized for GrandChildPlus Parameters",
+            "match": {
+              "location": "GrandChildPlusScenarios.parametersAreIntializedForGrandChildPlusParameters()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 9,
+        "name": "Search offers using ExternalOfferID, OfferStatus, EndDate \u0026 StoreId",
+        "description": "",
+        "id": "offersearch-\"grandchild++-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-externalofferid--offerstatus--enddate-\u0026-storeid",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 15672847,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "Business User searches offers ExternalOfferID, OfferStatus, EndDate \u0026 StoreId",
+            "match": {
+              "location": "GrandChildPlusScenarios.businessUserSearchesOffersExternalOfferIDOfferStatusEndDateStoreId(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByEndDateAndOfferStatus\u0026ExternalOfferIdAndStoreID"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3472868996,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "API Response is extracted for GrandChildPlus Parameters",
+            "match": {
+              "location": "GrandChildPlusScenarios.apiResponseIsExtractedForGrandChildPlusParameters()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.GrandChildPlusScenarios.apiResponseIsAssertedForSuccessStatusCodeForGrandChildPlusParameters(GrandChildPlusScenarios.java:134)\r\n\tat ✽.API Response is asserted for Success Status Code for GrandChildPlus Parameters(src/test/resources/OfferSearchGrandChildPlus.feature:13)\r\n",
+              "duration": 5571045,
+              "status": "failed"
+            },
+            "line": 13,
+            "name": "API Response is asserted for Success Status Code for GrandChildPlus Parameters",
+            "match": {
+              "location": "GrandChildPlusScenarios.apiResponseIsAssertedForSuccessStatusCodeForGrandChildPlusParameters()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 14,
+            "name": "API Response is asserted for ALL attributes",
+            "match": {
+              "location": "GrandChildPlusScenarios.apiResponseIsAssertedForALLAttributes(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "responseThree"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing GrandChildPlus Parameters",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 11671671,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined for GrandChildPlus Parameters",
+            "match": {
+              "location": "GrandChildPlusScenarios.theTestEnvironmentIsDefinedForGrandChildPlusParameters(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1144482,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized for GrandChildPlus Parameters",
+            "match": {
+              "location": "GrandChildPlusScenarios.parametersAreIntializedForGrandChildPlusParameters()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 17,
+        "name": "Search offers using OfferStatus,PriceCode, StoreID \u0026 ExternalOfferID",
+        "description": "",
+        "id": "offersearch-\"grandchild++-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-offerstatus-pricecode--storeid-\u0026-externalofferid",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 7926875,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "Business User searches offers using OfferStatus, PriceCode \u0026 StoreID \u0026 ExternalOfferID",
+            "match": {
+              "location": "GrandChildPlusScenarios.businessUserSearchesOffersUsingOfferStatusPriceCodeStoreIDExternalOfferID(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByPriceCdAndStoreIdAndOfferStatusAndExternalOfferId"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 425771285,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "API Response is extracted for GrandChildPlus Parameters",
+            "match": {
+              "location": "GrandChildPlusScenarios.apiResponseIsExtractedForGrandChildPlusParameters()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.GrandChildPlusScenarios.apiResponseIsAssertedForSuccessStatusCodeForGrandChildPlusParameters(GrandChildPlusScenarios.java:134)\r\n\tat ✽.API Response is asserted for Success Status Code for GrandChildPlus Parameters(src/test/resources/OfferSearchGrandChildPlus.feature:21)\r\n",
+              "duration": 838877,
+              "status": "failed"
+            },
+            "line": 21,
+            "name": "API Response is asserted for Success Status Code for GrandChildPlus Parameters",
+            "match": {
+              "location": "GrandChildPlusScenarios.apiResponseIsAssertedForSuccessStatusCodeForGrandChildPlusParameters()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 22,
+            "name": "API Response is asserted for ALL attributes",
+            "match": {
+              "location": "GrandChildPlusScenarios.apiResponseIsAssertedForALLAttributes(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "responseFours"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "OfferSearch \"GrandChild++ Parameters\" Test Scenarios with \"NO AUTH\"",
+    "description": "",
+    "id": "offersearch-\"grandchild++-parameters\"-test-scenarios-with-\"no-auth\"",
+    "keyword": "Feature",
+    "uri": "src/test/resources/OfferSearchGrandChildPlus.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 2503914,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 575523,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 9,
+        "name": "Search offers using offerStatus",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-offerstatus",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 7018262,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "Business User searches offers using offerStatus",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingOfferStatus(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByOfferStatus"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 409309197,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:13)\r\n",
+              "duration": 781447,
+              "status": "failed"
+            },
+            "line": 13,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 14,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "4"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 2215948,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 397082,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 17,
+        "name": "Search offers using ExternalOfferID",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-externalofferid",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 15911999,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "Business User searches offers using ExternalOfferID",
+            "match": {
+              "location": "ParentChildParams.testGetOfferSearchByExternalOfferId(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByExternalOfferId"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 409419542,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:21)\r\n",
+              "duration": 1835274,
+              "status": "failed"
+            },
+            "line": 21,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 22,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "1"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 4799443,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 396261,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 25,
+        "name": "Search offers using StoreID",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-storeid",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2141701,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "Business User searches offers using StoreID",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingStoreID(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByStoreId"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 361743436,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:29)\r\n",
+              "duration": 497994,
+              "status": "failed"
+            },
+            "line": 29,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 30,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "9"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 748631,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 220692,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 33,
+        "name": "Search offers using ZipCode",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-zipcode",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2631489,
+              "status": "passed"
+            },
+            "line": 34,
+            "name": "Business User searches offers using ZipCode",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingZipCode(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByPostalCode"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 390136037,
+              "status": "passed"
+            },
+            "line": 36,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:37)\r\n",
+              "duration": 475022,
+              "status": "failed"
+            },
+            "line": 37,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 38,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "9"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 679716,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 223974,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 41,
+        "name": "Search offers using Start Date",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-start-date",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 19768782,
+              "status": "passed"
+            },
+            "line": 42,
+            "name": "Business User searches offers using Start Date",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingStartDate(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByStartDate"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 394647924,
+              "status": "passed"
+            },
+            "line": 44,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:45)\r\n",
+              "duration": 1713442,
+              "status": "failed"
+            },
+            "line": 45,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 46,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "2"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 964811,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 261303,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 49,
+        "name": "Search offers using End Date",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-end-date",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1674883,
+              "status": "passed"
+            },
+            "line": 50,
+            "name": "Business User searches offers using End Date",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingEndDate(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByEndDate"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 378378223,
+              "status": "passed"
+            },
+            "line": 52,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:53)\r\n",
+              "duration": 604237,
+              "status": "failed"
+            },
+            "line": 53,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 54,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "10"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 1736004,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 236690,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 57,
+        "name": "Search offers using Offer Program Code",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-offer-program-code",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2565445,
+              "status": "passed"
+            },
+            "line": 58,
+            "name": "Business User searches offers using Offer Program Code",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingOfferProgramCode(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByOfferProgramCode"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 377177132,
+              "status": "passed"
+            },
+            "line": 60,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:61)\r\n",
+              "duration": 539015,
+              "status": "failed"
+            },
+            "line": 61,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 62,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "10"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 3121688,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 281403,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 65,
+        "name": "Search offers using ZipCode and offerStatus",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-zipcode-and-offerstatus",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1327436,
+              "status": "passed"
+            },
+            "line": 66,
+            "name": "Business User searches offers using ZipCode \u0026 Offerstatus",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingZipCodeOfferstatus(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByZipCodeandStatus"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 355963595,
+              "status": "passed"
+            },
+            "line": 68,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:69)\r\n",
+              "duration": 399133,
+              "status": "failed"
+            },
+            "line": 69,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 70,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "4"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 703508,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 576343,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 73,
+        "name": "Search offers using ExternalOfferId and offerStatus",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-externalofferid-and-offerstatus",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 5605913,
+              "status": "passed"
+            },
+            "line": 74,
+            "name": "Business User searches offers using ExternalOfferId \u0026 Offerstatus",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingExternalOfferIdOfferstatus(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByExternalOfferIdandStatus"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 365951358,
+              "status": "passed"
+            },
+            "line": 76,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:77)\r\n",
+              "duration": 1174017,
+              "status": "failed"
+            },
+            "line": 77,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 78,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "4"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 9381885,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 491430,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 81,
+        "name": "Search offers using EndDate and offerStatus",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-enddate-and-offerstatus",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 3559381,
+              "status": "passed"
+            },
+            "line": 82,
+            "name": "Business User searches offers using EndDate \u0026 Offerstatus",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingEndDateOfferstatus(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByEndDateandStatus"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 374413556,
+              "status": "passed"
+            },
+            "line": 84,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:85)\r\n",
+              "duration": 808932,
+              "status": "failed"
+            },
+            "line": 85,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 86,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "4"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 2,
+        "name": "Set up Environment for Testing",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 2573240,
+              "status": "passed"
+            },
+            "line": 3,
+            "name": "The Test Environment is Defined",
+            "match": {
+              "location": "ParentChildParams.beforeMethod(String,String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "currentTestEnvironemnt",
+                  "dev"
+                ]
+              },
+              {
+                "cells": [
+                  "apiGroupName",
+                  "offerSearchRunners"
+                ]
+              },
+              {
+                "cells": [
+                  "apiName",
+                  "get_offersByParentParams"
+                ]
+              }
+            ],
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 514402,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Parameters are intialized",
+            "match": {
+              "location": "ParentChildParams.parametersAreIntialized()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 89,
+        "name": "Search offers using StartDate and offerStatus",
+        "description": "",
+        "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\";search-offers-using-startdate-and-offerstatus",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 14179277,
+              "status": "passed"
+            },
+            "line": 90,
+            "name": "Business User searches offers using StartDate \u0026 Offerstatus",
+            "match": {
+              "location": "ParentChildParams.businessUserSearchesOffersUsingStartDateOfferstatus(String\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "testGetOfferSearchByStartDateandStatus"
+                ]
+              }
+            ],
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 361096128,
+              "status": "passed"
+            },
+            "line": 92,
+            "name": "API Response is extracted",
+            "match": {
+              "location": "ParentChildParams.apiResponseIsExtracted()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.AssertionError: expected [200] but found [404]\r\n\tat org.testng.Assert.fail(Assert.java:94)\r\n\tat org.testng.Assert.failNotEquals(Assert.java:496)\r\n\tat org.testng.Assert.assertEquals(Assert.java:125)\r\n\tat org.testng.Assert.assertEquals(Assert.java:372)\r\n\tat org.testng.Assert.assertEquals(Assert.java:382)\r\n\tat com.albertsons.api.cucumberStepDefinitions.ParentChildParams.assertStatusCode(ParentChildParams.java:99)\r\n\tat ✽.API Response is asserted for Success Status Code(src/test/resources/OfferSearchParentChild.feature:93)\r\n",
+              "duration": 409798,
+              "status": "failed"
+            },
+            "line": 93,
+            "name": "API Response is asserted for Success Status Code",
+            "match": {
+              "location": "ParentChildParams.assertStatusCode()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 94,
+            "name": "API Response is asserted for counts",
+            "match": {
+              "location": "ParentChildParams.assertCount(String,Integer\u003e)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "counts",
+                  "1"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "OfferSearch \"Parent \u0026 Child Parameters\" Test Scenarios with \"NO AUTH\"",
+    "description": "",
+    "id": "offersearch-\"parent-\u0026-child-parameters\"-test-scenarios-with-\"no-auth\"",
+    "keyword": "Feature",
+    "uri": "src/test/resources/OfferSearchParentChild.feature",
+    "tags": []
+  }
+]

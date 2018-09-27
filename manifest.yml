@@ -1,0 +1,5 @@
+---
+applications:
+  - name: offers
+    buildpack: java_buildpack_offline
+    path: ./target/emju-offers-${timestamp}.${env.BUILD_NUMBER}.jar

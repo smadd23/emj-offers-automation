@@ -1,0 +1,126 @@
+{
+  "dev": {
+    "testGetOfferSearchByOfferStatus": [
+      {
+        "q": "offerStatus=E"
+      }
+    ],
+    "testGetOfferSearchByOfferId": [
+      {
+        "q": "offerId=500501"
+      }
+    ],
+    "testGetOfferSearchByExternalOfferId":[
+      {
+        "q": "externalOfferId=NAISC50002680"
+      }
+    ],
+    "testGetOfferSearchByPostalCode":[
+      {
+        "q": "postalCd=94568"
+      }
+    ],
+    "testGetOfferSearchByStoreId":[
+      {
+        "q": "storeId=1455"
+      }
+    ],
+    "testGetOfferSearchByStartDate":[
+      {
+        "q":"startDt=[2018-09-01T00:00:00Z TO *]"
+      }
+    ],
+    "testGetOfferSearchByEndDate":[
+      {
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z]"
+      }
+    ],
+    "testGetOfferSearchByOfferProgramCode":[
+      {
+      "q":"offerProgramCd=SC"
+      }
+    ],
+    "testGetOfferSearchByZipCodeandStatus":[
+      {"q" : "postalCd=94568;offerStatus=E"}
+    ],
+    "testGetOfferSearchByStartDateandStatus" :[
+      {
+        "q":"startDt=[2018-09-01T00:00:00Z TO *];offerStatus=E"
+      }
+    ],
+    "testGetOfferSearchByEndDateandStatus" :[
+      {
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z];offerStatus=E"
+      }
+    ],
+
+    "testGetOfferSearchByExternalOfferIdandStatus":[
+      {
+        "q":"externalOfferId=2520W3218_001120,offerStatus=E"
+      }
+    ],
+    "testGetOfferSearchByExternalOfferIdAndStatusAndProgramCode":[
+      {
+        "q":"offerStatus=(A orE);offerProgramCd-SC;externalOfferId=2520W3218_001120"
+      }
+    ],
+    "testGetOfferSearchByEndDateAndStoreIdAndExternalOfferId":[
+      {
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z];externalOfferId=2520W3218_001120;storeId=(1455 or 2655)"
+      }
+    ],
+    "testGetOfferSearchByPriceCdAndStoreIdAndOfferStatusAndExternalOfferId":[
+      {
+      "q":"priceCd=20;storeId=(1455 or 2699);offerStatus=(A or E);externalOfferId=2520W3218_001120"
+      }
+    ],
+    "testGetOfferSearchByEndDateAndOfferStatus&ExternalOfferIdAndStoreID":[
+      {
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z];offerStatus=A;externalOfferId=2520W3218_001120;storeId=(1455 or 2655)"
+      }
+    ],
+    "testGetOfferSearchByNullParameter":[
+      {
+        "q":""
+      }
+    ],
+    "testGetOfferSearchByPartialParameter":[
+      {
+        "q":"storeId="
+      }
+    ],
+    "testGetOfferSearchByInvalidParameter":[
+      {
+        "q":"offerStatus=Q"
+      }
+    ],
+    "testGetOfferSearchBySpecialCharacters":[
+      {
+        "q":"storeId=1455&_fac",
+        "q" :"offerId=99397520&!!",
+        "q" :"offerStatus=99397520&!!090"
+      }
+    ],
+    "testGetOfferSearchByMissingParamValue":[
+      {
+        "q":"storeId=(1455 or "
+      }
+    ],
+    "testGetOfferSearchByLengthyParam":[
+      {
+        "q":"offerStatus=(Q or ovwhudhahoahdoacjdoi)"
+      }
+    ],
+    "testGetOfferSearchByUnavailableParameter":[
+      {
+        "q":"externalOfferId=NAISC",
+        "q":"offerProgramCd=OP"
+      }
+    ],
+    "testGetOfferSearchByWrongParam":[
+      {
+        "q":"storeId=14"
+      }
+    ]
+  }
+}

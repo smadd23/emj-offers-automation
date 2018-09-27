@@ -1,0 +1,60 @@
+resource_types:
+- name: artifactory
+  type: docker-image
+  source:
+    repository: pivotalservices/artifactory-resource
+
+
+resources:
+- name: source-code
+  type: git
+  source:
+    uri: https://github.com/J4U-Nimbus/emju-offers.git
+    branch: master
+
+- name: jar-store
+  type: artifactory
+  source:
+    endpoint: http://albertsons-binrepo-dev.westus.cloudapp.azure.com/artifactory
+    repository: "libs-release-local/development"
+    regex: "emju-offers(?.*).jar"
+    username: admin
+    password: password
+    skip_ssl_verification: true
+
+
+
+jobs:
+- name: package
+  plan:
+  - get: source-code
+    trigger: true
+  - task: package
+    privileged: true
+    file: source-code/ci/tasks/package.yml
+  - put: jar-store
+    params:
+      file: app-jar/manifest.yml
+
+
+
+
+
+- name: just-list
+  plan:
+  - get: source-code
+    trigger: true
+  - task: list-repo-content
+    config:
+      platform: linux
+      inputs:
+      - name: source-code
+      image_resource:
+        type: docker-image
+        source: { repository: ubuntu }
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          ls -R ./source-code
