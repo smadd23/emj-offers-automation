@@ -2,39 +2,44 @@ package com.safeway.j4u.emju.offers.mapper;
 
 import static java.util.stream.Collectors.toMap;
 
+import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
+import com.safeway.j4u.emju.offers.entity.OfferDetails;
+import com.safeway.j4u.emju.offers.model.Offer;
+import com.safeway.j4u.emju.offers.model.offersetup.OfferCustomerFriendlyCategory;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 
-import com.google.common.base.Optional;
-import com.safeway.j4u.emju.offers.entity.OfferDetails;
-import com.safeway.j4u.emju.offers.model.Offer;
-import com.safeway.j4u.emju.offers.model.offersetup.PostalCode;
-
 @Mapper(componentModel = "spring")
+
 public interface OfferDetailsMapper {
 	@Mappings({ @Mapping(target = "offerId", source = "offer.info.id.offerId"),
 			@Mapping(target = "externalOfferId", source = "offer.info.id.externalOfferId"),
 			@Mapping(target = "aggregatorOfferId", source = "offer.info.id.aggregatorOfferId"),
 			@Mapping(target = "offerProviderName", source = "offer.info.offerProviderName"),
 			@Mapping(target = "categories", expression = "java(java.util.Objects.isNull(offer.getInfo()) ? null : com.safeway.j4u.emju.offers.mapper.OfferDetailsMapper.transformMapsToSolrFriendlyMaps(offer.getInfo().getCategories(), \"categories\"))"),
+			@Mapping(target = "categoriesSet", expression = "java(java.util.Objects.isNull(offer.getInfo()) ? null : new HashSet<String>(offer.getInfo().getCategories().values()))"),
 			@Mapping(target = "primaryCategory", source = "offer.info.primaryCategory"),
+			@Mapping(target = "primaryCategorySet", expression = "java(java.util.Objects.isNull(offer.getInfo().getPrimaryCategory()) ? null : new HashSet<String>(offer.getInfo().getPrimaryCategory().values()))"),
 			@Mapping(target = "events", expression = "java(java.util.Objects.isNull(offer.getInfo()) ? null : com.safeway.j4u.emju.offers.mapper.OfferDetailsMapper.transformMapsToSolrFriendlyMaps(offer.getInfo().getEvents(), \"events\"))"),
+			@Mapping(target = "eventsSet", expression = "java(java.util.Objects.isNull(offer.getInfo().getEvents()) ? null : new HashSet<String>(offer.getInfo().getEvents().values()))"),
 			@Mapping(target = "offerProgramCode", expression = "java( offer.getInfo().getOfferProgramCode().name())"),
 			@Mapping(target = "offerSubProgram", source = "offer.info.offerSubProgram"),
-			@Mapping(target = "offerStatus", expression = "java( offer.getInfo().getOfferStatus() !=null ? offer.getInfo().getOfferStatus().name(): null )"),
+			@Mapping(target = "offerStatus", expression = "java( offer.getInfo().getOfferStatus() !=null ? offer.getInfo().getOfferStatus().name(): com.safeway.j4u.emju.offers.model.StatusType.P.name() )"),
 			@Mapping(target = "priceTitle", source = "offer.info.description.priceTitle"),
 			@Mapping(target = "priceValue", source = "offer.info.description.priceValue"),
 			@Mapping(target = "savingsValueText", source = "offer.info.description.savingsValueText"),
 			@Mapping(target = "titleDescription", source = "offer.info.description.titleDescription"),
+			@Mapping(target = "titleDescriptionSet", expression = "java(java.util.Objects.isNull(offer.getInfo().getDescription()) || java.util.Objects.isNull(offer.getInfo().getDescription().getTitleDescription()) ? null : new HashSet<String>(offer.getInfo().getDescription().getTitleDescription().values()))"),
 			@Mapping(target = "productDescription", source = "offer.info.description.productDescription"),
+			@Mapping(target = "productDescriptionSet", expression = "java(java.util.Objects.isNull(offer.getInfo().getDescription()) || java.util.Objects.isNull(offer.getInfo().getDescription().getProductDescription()) ? null : new HashSet<String>(offer.getInfo().getDescription().getProductDescription().values()))"),
 			@Mapping(target = "disclaimerText", source = "offer.info.description.disclaimerText"),
 			@Mapping(target = "receiptDescriptions", source = "offer.info.description.receiptDescriptions"),
 			@Mapping(target = "productImageId", source = "offer.info.productImageId"),
@@ -59,17 +64,18 @@ public interface OfferDetailsMapper {
 			@Mapping(target = "offerEffectiveEndDate", source = "offer.rules.endDate.offerEffectiveEndDate"),
 			@Mapping(target = "offerTestEffectiveEndDate", source = "offer.rules.endDate.offerTestEffectiveEndDate"),
 			@Mapping(target = "divisions", expression = "java((java.util.Objects.isNull(offer.getRules()) || java.util.Objects.isNull(offer.getRules().getApplicableTo())) ? null : com.safeway.j4u.emju.offers.mapper.OfferDetailsMapper.transformMapsToSolrFriendlyMaps(offer.getRules().getApplicableTo().getDivisions(), \"divisions\"))"),
+			@Mapping(target = "divisionsSet", expression = "java((java.util.Objects.isNull(offer.getRules()) || java.util.Objects.isNull(offer.getRules().getApplicableTo())  || java.util.Objects.isNull(offer.getRules().getApplicableTo().getDivisions())) ? null : new HashSet<String>(offer.getRules().getApplicableTo().getDivisions().values()))"),
 			@Mapping(target = "storeGroups", source = "offer.rules.applicableTo.storeGroups"),
 			@Mapping(target = "storeIds", source = "offer.rules.applicableTo.storeIds"),
 			@Mapping(target = "postalCodes", source = "offer.rules.applicableTo.postalCodes"),
 			@Mapping(target = "upcs", source = "offer.rules.applicableTo.upcs"),
 			@Mapping(target = "terminals", source = "offer.rules.applicableTo.terminals"),
-			@Mapping(target = "qualificationUnitType", expression = "java( offer.getRules().getQualification().getQualificationUnitType().name() )"),
-			@Mapping(target = "qualificationUnitSubType", expression = "java( offer.getRules().getQualification().getQualificationUnitSubType().name() )"),
+			@Mapping(target = "qualificationUnitType", expression = "java( (java.util.Objects.isNull(offer.getRules().getQualification().getQualificationUnitType()) ? null : offer.getRules().getQualification().getQualificationUnitType().name() ))"),
+			@Mapping(target = "qualificationUnitSubType", expression = "java( (java.util.Objects.isNull(offer.getRules().getQualification().getQualificationUnitSubType()) ? null : offer.getRules().getQualification().getQualificationUnitSubType().name()) )"),
 			@Mapping(target = "minProdPurchaseUnits", source = "offer.rules.qualification.minProdPurchaseUnits"),
 			@Mapping(target = "maxProdPurchaseUnits", source = "offer.rules.qualification.maxProdPurchaseUnits"),
 			@Mapping(target = "isBuyXGetYOffer", source = "offer.rules.qualification.isBuyXGetYOffer"),
-			@Mapping(target = "benefitValueType", expression = "java(offer.getRules().getBenefit().getBenefitValueType().name() )"),
+			@Mapping(target = "benefitValueType", expression = "java( (java.util.Objects.isNull(offer.getRules().getBenefit().getBenefitValueType() ) ? null : offer.getRules().getBenefit().getBenefitValueType().name()) )"),
 			@Mapping(target = "usageLimitTypePerUser", expression = "java(offer.getRules().getUsageLimits().getUsageLimitTypePerUser().name() )"),
 			@Mapping(target = "usageLimitPerUser", source = "offer.rules.usageLimits.usageLimitPerUser"),			
 			@Mapping(target = "banners", source = "offer.rules.applicableTo.banners"),
@@ -165,7 +171,7 @@ public interface OfferDetailsMapper {
 
 	@Mappings({ @Mapping(target = "offerId", source = "offerId"),
 			@Mapping(target = "customerFriendlyProgramId", source = "offerProgramCode"),
-			@Mapping(target = "usageLimitTypeCode", expression = "java(UsageLimitType.valueOf(offerDetails.getUsageLimitTypePerUser()))"), // to
+			@Mapping(target = "usageLimitTypeCode", expression = "java( offerDetails.getUsageLimitTypePerUser()!=null ? UsageLimitType.valueOf(offerDetails.getUsageLimitTypePerUser()) : null)"), // to
 																																			// check
 			@Mapping(target = "priceMethodCode", source = "priceCode"),
 			@Mapping(target = "offerEffectiveStartDate", source = "offerEffectiveStartDate"),
@@ -180,52 +186,49 @@ public interface OfferDetailsMapper {
 			@Mapping(target = "offerStatusTypeId", source = "offerStatus"),
 			@Mapping(target = "lastUpdateUserId", source = "lastUpdatedUserId"),
 			@Mapping(target = "serviceProviderOfferId", source = "aggregatorOfferId"),
-			/*
-			 * @Mapping(target="postalCds", qualifiedByName =
-			 * "transformStoresOrPostalCodes"),
-			 */
-			@Mapping(target = "offerVerbiage.titleLine1Description", expression = "java(offerDetails.getTitleDescription() != null ? offerDetails.getTitleDescription().get(\"titleDsc1\") : null)"),
-			@Mapping(target = "offerVerbiage.titleLine2Description", expression = "java(offerDetails.getTitleDescription() != null ? offerDetails.getTitleDescription().get(\"titleDsc2\") : null)"),
-			@Mapping(target = "offerVerbiage.productLine1Description", expression = "java(offerDetails.getProductDescription() != null ? offerDetails.getProductDescription().get(\"prodDsc1\") : null)"),
-			@Mapping(target = "offerVerbiage.savingsValueText", source = "savingsValueText"),
-			@Mapping(target = "offerVerbiage.priceTitle1Text", source = "priceTitle"),
-			@Mapping(target = "offerVerbiage.priceValue1Text", source = "priceValue"),
-			@Mapping(target = "offerVerbiage.disclaimerText", source = "disclaimerText"),
-			@Mapping(target = "customerFriendlyCategory.shoppingListCFCategoryId", expression = "java( offerDetails.getPrimaryCategory() != null ? offerDetails.getPrimaryCategory().keySet().iterator().next() : null  )"),
-			@Mapping(target = "customerFriendlyCategory.shoppingListCFCategoryName", expression = "java( offerDetails.getPrimaryCategory() != null ? offerDetails.getPrimaryCategory().values().iterator().next() : null )")/*,
-			@Mapping(target = "offerCustomerFriendlyCategories", source = "categories", qualifiedByName = "transformCategoriesToCustomerFriendlyCategories") */})
-	com.safeway.j4u.emju.offers.model.offersetup.Offer toJ4UOffer(OfferDetails offerDetails);
+      @Mapping(target="postalCds", expression = "java(com.safeway.j4u.emju.offers.mapper.OfferDetailsMapper.transformStoresOrPostalCodes(offerDetails.getStoreIds(), offerDetails.getPostalCodes()))"),
+      @Mapping(target = "offerVerbiage.titleLine1Description", expression = "java(offerDetails.getTitleDescription() != null ? offerDetails.getTitleDescription().get(\"titleDsc1\") : null)"),
+      @Mapping(target = "offerVerbiage.titleLine2Description", expression = "java(offerDetails.getTitleDescription() != null ? offerDetails.getTitleDescription().get(\"titleDsc2\") : null)"),
+      @Mapping(target = "offerVerbiage.productLine1Description", expression = "java(offerDetails.getProductDescription() != null ? offerDetails.getProductDescription().get(\"prodDsc1\") : null)"),
+      @Mapping(target = "offerVerbiage.savingsValueText", source = "savingsValueText"),
+      @Mapping(target = "offerVerbiage.priceValue1Text", source = "priceValue"),
+      @Mapping(target = "offerVerbiage.priceTitle1Text", source = "priceTitle"),
+      @Mapping(target = "offerVerbiage.disclaimerText", source = "disclaimerText"),
+      @Mapping(target = "customerFriendlyCategory.shoppingListCFCategoryId", expression = "java( offerDetails.getPrimaryCategory() != null ? offerDetails.getPrimaryCategory().keySet().iterator().next() : null  )"),
+      @Mapping(target = "customerFriendlyCategory.shoppingListCFCategoryName", expression = "java( offerDetails.getPrimaryCategory() != null ? offerDetails.getPrimaryCategory().values().iterator().next() : null )"),
+      @Mapping(target = "offerCustomerFriendlyCategories", source = "categories", qualifiedByName = "transformCategoriesToCustomerFriendlyCategories") })
+  com.safeway.j4u.emju.offers.model.offersetup.Offer toJ4UOffer(OfferDetails offerDetails);
 
-	/*@Named("transformCategoriesToCustomerFriendlyCategories")
-	default List<OfferCustomerFriendlyCategory> transformCategoriesToCustomerFriendlyCategories(
-			Map<String, String> categories) {
-		if (Optional.fromNullable(categories).isPresent()) {
-			List<OfferCustomerFriendlyCategory> offerCustomerFriendlyCategories offerCustomerFriendlyCategories = new ArrayList<OfferCustomerFriendlyCategory>(categories.size());
-			categories.entrySet().stream().forEach(category -> {
-				OfferCustomerFriendlyCategory offerCustomerFriendlyCategory = OfferCustomerFriendlyCategory.builder()
-						.customerFriendlyCategoryId(category.getKey()).customerFriendlyCategoryName(category.getValue())
-						.build();
-				 offerCustomerFriendlyCategories.add(offerCustomerFriendlyCategory);
-			});
-			return offerCustomerFriendlyCategories;
-		} else {
-			return Collections.emptyList();
-		}
-	}*/
+  @Named("transformCategoriesToCustomerFriendlyCategories")
+  default List<OfferCustomerFriendlyCategory> transformCategoriesToCustomerFriendlyCategories(
+      Map<String, String> categories) {
+    if (Optional.fromNullable(categories).isPresent()) {
+      List<OfferCustomerFriendlyCategory> offerCustomerFriendlyCategories = Lists.newArrayList();
+      categories.entrySet().stream().forEach(category -> {
+        OfferCustomerFriendlyCategory offerCustomerFriendlyCategory = OfferCustomerFriendlyCategory.builder()
+            .customerFriendlyCategoryId(category.getKey().replaceFirst("categories","")).customerFriendlyCategoryName(category.getValue())
+            .build();
+        offerCustomerFriendlyCategories.add(offerCustomerFriendlyCategory);
+      });
+      return offerCustomerFriendlyCategories;
+    } else {
+      return Collections.emptyList();
+    }
+  }
 
-	@Named("transformStoresOrPostalCodes")
-	default List<PostalCode> transformStoresOrPostalCodes(Set<String> fromStoreIds, Set<Integer> fromPostalCodes) {
-		List<PostalCode> postalCodes = Collections.emptyList();
-		if (Optional.fromNullable(fromStoreIds).isPresent()) {
-			fromStoreIds.stream().forEach(storeId -> {
-				postalCodes.add(PostalCode.builder().postalCode(storeId).build());
-			});
-		}
-		if (Optional.fromNullable(fromPostalCodes).isPresent()) {
-			fromPostalCodes.stream().forEach(postalCode -> {
-				postalCodes.add(PostalCode.builder().postalCode(postalCode.toString()).build());
-			});
-		}
-		return postalCodes;
-	}
+  static List<String> transformStoresOrPostalCodes(Set<String> fromStoreIds, Set<Integer> fromPostalCodes) {
+    List<String> postalCodes = Lists.newArrayList();
+    // TODO: Clarification on store id
+    if (Optional.fromNullable(fromStoreIds).isPresent()) {
+      fromStoreIds.stream().forEach(storeId -> {
+        postalCodes.add(storeId);
+      });
+    }
+//    if (Optional.fromNullable(fromPostalCodes).isPresent()) {
+//      fromPostalCodes.stream().forEach(postalCode -> {
+//        postalCodes.add(PostalCode.builder().postalCode(String.valueOf(postalCode)).build());
+//      });
+//    }
+    return postalCodes;
+  }
 }

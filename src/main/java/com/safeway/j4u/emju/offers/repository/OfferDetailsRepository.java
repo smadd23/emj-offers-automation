@@ -2,7 +2,7 @@ package com.safeway.j4u.emju.offers.repository;
 
 import com.safeway.j4u.emju.offers.entity.OfferDetails;
 import java.time.ZonedDateTime;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.data.cassandra.repository.Query;
 import org.springframework.data.cassandra.repository.ReactiveCassandraRepository;
@@ -32,5 +32,6 @@ public interface OfferDetailsRepository extends ReactiveCassandraRepository<Offe
 	@Query("SELECT * FROM offer_details WHERE external_offer_id IN :externalOfferIds")
 	Flux<OfferDetails> findOfferDetailsIdsByExternalOfferIds(@Param("externalOfferIds") Set<String> externalOfferIds);
 
-	Flux<OfferDetails> findByOfferIdAndOfferStatusIn(Flux<Long> offerIds, List<String> offerStatus);
+	@Query("SELECT JSON* FROM offer_details WHERE solr_query = '{\"q\":\"*:*\",\"facet\":{\"field\":[\"offer_program_cd\", \"categories_set\", \"events_set\"]}}'")
+	Mono<Optional<String>> findFacetCounts();
 }

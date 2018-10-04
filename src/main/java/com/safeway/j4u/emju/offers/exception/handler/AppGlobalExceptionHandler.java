@@ -7,12 +7,10 @@ import static com.safeway.j4u.emju.offers.exception.handler.ApiError.fromMethodA
 import static com.safeway.j4u.emju.offers.exception.handler.ApiError.fromResponseStatusException;
 import static com.safeway.j4u.emju.offers.exception.handler.ApiError.fromTypeMismatchException;
 import static com.safeway.j4u.emju.offers.exception.handler.ApiError.fromUnknownException;
+import static com.safeway.j4u.emju.offers.exception.handler.ApiError.fromWebClientResponseException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import javax.annotation.PostConstruct;
 import javax.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +21,7 @@ import org.springframework.core.codec.DecodingException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.ServerWebInputException;
@@ -35,19 +34,16 @@ import reactor.core.publisher.Mono;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AppGlobalExceptionHandler implements WebExceptionHandler {
 
+  @Autowired
   private ObjectMapper objectMapper;
-
-  @PostConstruct
-  public void init() {
-    objectMapper.findAndRegisterModules();
-    objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    objectMapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
-  }
 
   @Override
   public Mono<Void> handle(ServerWebExchange exchange, Throwable cause) {
     log.info(cause.getClass().getName(),cause);
     try {
+      if(cause instanceof WebClientResponseException) {
+          return exchange.getResponse().writeWith(fromWebClientResponseException(exchange, cause, objectMapper));
+      }
       if(cause instanceof  ResponseStatusException) {
         if (cause instanceof ServerWebInputException) {
           return handleServerWebInputException(exchange, cause);

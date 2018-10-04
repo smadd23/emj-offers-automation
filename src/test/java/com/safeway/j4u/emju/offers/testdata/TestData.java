@@ -1,19 +1,11 @@
 package com.safeway.j4u.emju.offers.testdata;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.safeway.j4u.emju.offers.entity.OfferDetails;
 import com.safeway.j4u.emju.offers.model.ApplicableTo;
 import com.safeway.j4u.emju.offers.model.AuditInfo;
 import com.safeway.j4u.emju.offers.model.Benefit;
@@ -33,25 +25,14 @@ import com.safeway.j4u.emju.offers.model.StartDate;
 import com.safeway.j4u.emju.offers.model.StatusType;
 import com.safeway.j4u.emju.offers.model.UsageLimitType;
 import com.safeway.j4u.emju.offers.model.UsageLimits;
+import java.io.IOException;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class TestData {
-	
-	public static OfferDetails createOfferDetails(Long offerId)
-	{
-		OfferDetails offerDetails = new OfferDetails();
-		offerDetails.setOfferId(offerId);
-		offerDetails.setOfferProviderName("muniyandi vilas");
-		offerDetails.setExternalOfferId("1000");
-		offerDetails.setAggregatorOfferId("50001");
-		
-		offerDetails.setCategories(new HashMap<String, String>() {{ put("1", "Personal Care & Health"); put("2", "Garbge-bell soup");}});
-		offerDetails.setPrimaryCategory(new HashMap<String, String>() {{ put("1", "Frozen");}});
-		
-		offerDetails.setOfferProgramCode("MF");
-		offerDetails.setCreatedTs(ZonedDateTime.parse("2018-08-17T00:00:45.000-07:00"));
-		
-		return offerDetails;
-	}
 	
 	public static void main(String[] args) {
 		//test
@@ -166,7 +147,7 @@ public class TestData {
 		applicableTo.setPostalCodes(new HashSet<String>() {{add("94568");add("94588");}});
 		//Future use, no Departments available in OMS now.
 		applicableTo.setDepartments(new HashSet<String>() {{add("Dept1");add("Dept2");}});
-		applicableTo.setUpcs(new HashSet<Integer>() {{add(1234567890);add(1234567890);}});
+		applicableTo.setUpcs(new HashSet<Long>() {{add(1234567890L);add(1234567890L);}});
 		rules.setApplicableTo(applicableTo);
 		
 		Qualification qualification = new Qualification();

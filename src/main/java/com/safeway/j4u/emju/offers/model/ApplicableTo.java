@@ -3,6 +3,7 @@ package com.safeway.j4u.emju.offers.model;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +18,14 @@ import lombok.ToString;
 @Builder
 @ToString
 public class ApplicableTo {
-	private Map<String, String> banners;
-	private Map<String, String> divisions;
-	private Set<String> storeGroups;
-	private Set<String> channels;
-	private Set<String> terminals;
-	private Set<String> storeIds = new HashSet<>();
-	private Set<String> postalCodes = new HashSet<>();
-	private Set<Integer> upcs = new HashSet<>();
-	private Set<String> departments;
+	private Map<@NotNull String, @NotNull String> banners;
+	private Map<@NotNull String, @NotNull String> divisions;
+
+	private Set<@NotNull String> storeGroups;
+	private Set<@NotNull String> channels;
+	private Set<@NotNull String> terminals;
+	private Set<@NotNull String> storeIds = new HashSet<>();
+	private Set<@NotNull String> postalCodes = new HashSet<>();
+	private Set<@NotNull Long> upcs = new HashSet<>();
+	private Set<@NotNull String> departments;
 }

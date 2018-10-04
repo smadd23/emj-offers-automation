@@ -1,15 +1,15 @@
 package com.safeway.j4u.emju.offers.model.offersetup;
 
+import com.migesok.jaxb.adapter.javatime.ZonedDateTimeXmlAdapter;
+import com.safeway.j4u.emju.offers.model.UsageLimitType;
 import java.time.ZonedDateTime;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.safeway.j4u.emju.offers.model.UsageLimitType;
-
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@XmlRootElement(name="Offer", namespace="http://www.safeway.com/app/emju/offersetup/domain" )
+@XmlRootElement(name="Offer")
 @XmlAccessorType(XmlAccessType.NONE)
 public class Offer {
 	@XmlElement(name="OfferId")
@@ -31,12 +31,16 @@ public class Offer {
 	@XmlElement(name="PriceMethodCode")
 	private String priceMethodCode;
 	@XmlElement(name="OfferEffectiveStartDate")
+	@XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
 	private ZonedDateTime offerEffectiveStartDate;
 	@XmlElement(name="OfferEffectiveEndDate")
+	@XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
 	private ZonedDateTime offerEffectiveEndDate;
 	@XmlElement(name="DisplayEffectiveStartDate")
+	@XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
 	private ZonedDateTime displayEffectiveStartDate;
 	@XmlElement(name="DisplayEffectiveEndDate")
+	@XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
 	private ZonedDateTime displayEffectiveEndDate;
 	@XmlElement(name="ServiceProviderName")
 	private String serviceProviderName;
@@ -47,6 +51,7 @@ public class Offer {
 	@XmlElement(name="ProductImageId")
 	private String productImageId;
 	@XmlElement(name="LastUpdatedTimestamp")
+	@XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
 	private ZonedDateTime lastUpdatedTimestamp;
 	@XmlElement(name="OfferStatusTypeId")
 	private String offerStatusTypeId;
@@ -54,14 +59,17 @@ public class Offer {
 	private String lastUpdateUserId;
 	@XmlElement(name="SourceOfferId")
 	private String serviceProviderOfferId;
-	@XmlElement(name="PostalCodes")
-	private List<PostalCode> postalCds;
+	@XmlElementWrapper(name="PostalCodes")
+	@XmlElement(name="PostalCode")
+	private List<String> postalCds;
 	@XmlElement(name="OfferVerbiage")
 	private OfferVerbiage offerVerbiage;
 	@XmlElement(name="CustomerFriendlyCategory")
 	private CustomerFriendlyCategory customerFriendlyCategory;
-	@XmlElement(name="OfferCustomerFriendlyCategories")
+	@XmlElementWrapper(name="OfferCustomerFriendlyCategories")
+	@XmlElement(name="OfferCustomerFriendlyCategory")
 	private List<OfferCustomerFriendlyCategory> offerCustomerFriendlyCategories;
+	@XmlElementWrapper
 	@XmlElement(name="OfferBanners")
 	private List<OfferBanner> offerBanners;
 }

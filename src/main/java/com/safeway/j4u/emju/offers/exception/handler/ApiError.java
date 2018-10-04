@@ -57,6 +57,15 @@ public class ApiError {
         new DefaultDataBufferFactory().wrap(objectMapper.writeValueAsBytes(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "Unknown error occurred"))));
   }
 
+  // 500
+  public static Mono<DataBuffer> fromWebClientResponseException(ServerWebExchange exchange, Throwable ex, ObjectMapper objectMapper) throws JsonProcessingException {
+    log.error("Unknown Exception", ex);
+    exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+    exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON_UTF8);
+    return Mono.just(
+        new DefaultDataBufferFactory().wrap(objectMapper.writeValueAsBytes(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "Client Response Error."))));
+  }
+
   // 4xx
   public static Mono<DataBuffer> fromBindException(ServerWebExchange exchange, WebExchangeBindException ex, ObjectMapper objectMapper) throws JsonProcessingException {
     log.debug("Errors received:: " + ex.getFieldErrors());

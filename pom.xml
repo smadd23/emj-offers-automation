@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.safeway</groupId>
 	<artifactId>emju-offers</artifactId>
-	<version>${timestamp}.${env.BUILD_NUMBER}</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>emju-offers</name>
 	<description>Demo project for Spring Boot</description>
@@ -24,7 +24,6 @@
 		<java.version>1.8</java.version>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy.MMdd</maven.build.timestamp.format>
-		<!--devops start -->
 		<!-- ************************ -->
 		<!-- Sonar/Reporting settings -->
 		<!-- ************************ -->
@@ -44,6 +43,8 @@
 		<jacoco.outputDir>${project.build.directory}</jacoco.outputDir>
 		<!--devops ends -->
 		<lombok.version>1.18.2</lombok.version>
+		<!-- swagger -->
+		<swagger.version>3.0.0-SNAPSHOT</swagger.version>
 	</properties>
 
 	<dependencies>
@@ -61,6 +62,25 @@
 			<artifactId>spring-boot-starter-data-cassandra-reactive</artifactId>
 		</dependency>
 
+		<!-- swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-spring-webflux</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -68,8 +88,8 @@
 		</dependency>
 
 		<dependency>
-    		<groupId>com.google.code.gson</groupId>
-    		<artifactId>gson</artifactId>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
 		</dependency>
 
 		<dependency>
@@ -82,38 +102,6 @@
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.cassandraunit</groupId>
-			<artifactId>cassandra-unit-spring</artifactId>
-			<version>2.1.9.2</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.cassandraunit</groupId>
-					<artifactId>cassandra-unit</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.cassandraunit</groupId>
-			<artifactId>cassandra-unit-shaded</artifactId>
-			<version>2.1.9.2</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hectorclient</groupId>
-			<artifactId>hector-core</artifactId>
-			<version>2.0-0</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>guava</artifactId>
-					<groupId>com.google.guava</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -138,15 +126,25 @@
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>com.google.guava</groupId>
-    		<artifactId>guava</artifactId>
-    		<version>23.5-jre</version> <!-- or 23.5-android for the Android flavor -->
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
 
-		<!--AUTOMATION DEPENDENCIES CUCUMBER, RESTASSURED etc.,-->
+		<dependency>
+			<groupId>com.migesok</groupId>
+			<artifactId>jaxb-java-time-adapters</artifactId>
+			<version>1.1.3</version>
+		</dependency>
 
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>24.1-jre</version> <!-- or 23.5-android for the Android flavor -->
+		</dependency>
+
+		<!-- Automation tests dependencies - start -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -155,78 +153,47 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>3.7.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.maven.surefire</groupId>
-			<artifactId>surefire-testng</artifactId>
-			<version>2.20</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.uncommons</groupId>
-			<artifactId>reportng</artifactId>
-			<version>1.1.4</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.testng</groupId>
-					<artifactId>testng</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
 			<version>3.0</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
-			<version>1.1.1</version>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.2.3</version>
-		</dependency>
+
 		<dependency>
 			<groupId>com.relevantcodes</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>2.41.1</version>
+			<scope>test</scope>
 		</dependency>
 
-		<!-- Rest Assured latest version -->
-		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
-			<version>3.1.0</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- JSON Path -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>json-path</artifactId>
-			<version>3.0.3</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- XML Path -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>xml-path</artifactId>
-			<version>3.0.3</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- Json Schema Validator -->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>json-schema-validator</artifactId>
-			<version>3.0.3</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -247,74 +214,46 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>1.9.63</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>24.1-jre</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.0</version>
-		</dependency>
-
-		<!--Dependencies related to YAML implementaiton -->
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>1.11</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-yaml</artifactId>
-			<version>2.3.0</version>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.9.6</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.9.6</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.2</version>
+			<scope>test</scope>
 		</dependency>
 
-		<!--Cucumber jar files-->
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>3.0.2</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java8</artifactId>
 			<version>3.0.2</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
 			<version>3.0.2</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -322,22 +261,33 @@
 			<artifactId>cucumber-jvm</artifactId>
 			<version>3.0.2</version>
 			<type>pom</type>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>maven-cucumber-reporting</artifactId>
 			<version>3.8.0</version>
+			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>cucumber-reporting</artifactId>
 			<version>3.8.0</version>
+			<scope>test</scope>
 		</dependency>
+
+		<!-- Automation tests dependencies - end -->
 
 	</dependencies>
 
 	<repositories>
+		<repository>
+			<id>jcenter-snapshots</id>
+			<name>jcenter</name>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+		</repository>
 		<repository>
 			<id>jcenter</id>
 			<name>jcenter</name>
@@ -383,67 +333,45 @@
 			<plugin>
 				<groupId>pl.project13.maven</groupId>
 				<artifactId>git-commit-id-plugin</artifactId>
-				<version>2.2.4</version>
-				<executions>
-					<execution>
-						<id>get-the-git-infos</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
-					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-					<prefix>git</prefix>
-					<verbose>false</verbose>
-					<injectAllReactorProjects>true</injectAllReactorProjects>
-					<generateGitPropertiesFile>true</generateGitPropertiesFile>
-					<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
-					<format>json</format>
-					<gitDescribe>
-						<skip>false</skip>
-						<always>false</always>
-						<dirty>-dirty</dirty>
-					</gitDescribe>
 					<excludeProperties>
 						<excludeProperty>git.commit.id.describe*</excludeProperty>
-						<excludeProperty>git.closest.tag.name*</excludeProperty>
+						<excludeProperty>git.closest*</excludeProperty>
+						<excludeProperty>git.dirty*</excludeProperty>
 					</excludeProperties>
 				</configuration>
 			</plugin>
-			<!-- Devops changes starts -->
-            <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
 					<includes>
-						<include>**/*.java</include>
+						<include>**/*Unit*.java</include>
 					</includes>
-            </configuration>
-            </plugin>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
 				<configuration>
 					<archive>
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addClasspath>true</addClasspath>
 						</manifest>
-						<manifestEntries>
-							<Git-Commit>${git.commit.id}</Git-Commit>
-							<Git-Branch>${git.branch}</Git-Branch>
-							<Build-Time>${git.build.time}</Build-Time>
-						</manifestEntries>
+						<!--<manifestEntries>-->
+						<!--<Git-Commit>${git.commit.id}</Git-Commit>-->
+						<!--<Git-Branch>${git.branch}</Git-Branch>-->
+						<!--<Build-Time>${git.build.time}</Build-Time>-->
+						<!--</manifestEntries>-->
 					</archive>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.5.1</version>
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
@@ -472,7 +400,7 @@
 							<value>org.sonar.java.jacoco.JUnitListener</value>
 						</property>
 					</properties>
-					<!-- Let's put failsafe reports with surefire to have access to tests 
+					<!-- Let's put failsafe reports with surefire to have access to tests
 						failures/success reports in sonar -->
 					<reportsDirectory>${project.build.directory}/surefire-reports
 					</reportsDirectory>
@@ -500,73 +428,89 @@
 			</plugin>
 			<!-- Devops changes ends -->
 			<plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-compiler-plugin</artifactId>
-			    <configuration>
-			        <source>1.8</source>
-			    	<target>1.8</target>
-			        <annotationProcessorPaths>
-			        	<path>
-		                    <groupId>org.projectlombok</groupId>
-		                    <artifactId>lombok</artifactId>
-		                    <version>${lombok.version}</version>
-		                </path>
-			            <path>
-			                <groupId>org.mapstruct</groupId>
-			                <artifactId>mapstruct-processor</artifactId>
-			                <version>1.2.0.Final</version>
-			            </path>
-			        </annotationProcessorPaths>
-			    </configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.2.0.Final</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
-
-            <!--TESTNG - SUREFIRE RELATED PLUGINS -->
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.20</version>
-                <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
-                    <properties>
-                        <property>
-                            <name>usedefaultlisteners</name>
-                            <value>true</value>
-                        </property>
-                        <property>
-                            <name>listener</name>
-                            <value>
-                                org.uncommons.reportng.HTMLReporter,org.uncommons.reportng.JUnitXMLReporter,com.albertsons.api.framework.support.common.TestListener
-                            </value>
-                        </property>
-                    </properties>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/java/com/albertsons/api/tests/GetOfferSearchTestsParent.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
-            <!--Cucumber related plugins and configurations-->
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>3.8.0</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>CucumberReportOfferSearch</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
-                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>component-tests</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<includes>
+								<include>**/*Component*.java</include>
+							</includes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>integration-tests</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<testFailureIgnore>true</testFailureIgnore>
+							<properties>
+								<property>
+									<name>listener</name>
+									<value>
+										com.safeway.j4u.emju.offers.api.framework.support.common.TestListener
+									</value>
+								</property>
+							</properties>
+							<suiteXmlFiles>
+								<suiteXmlFile>src/test/java/com/safeway/j4u/emju/offers/api/tests/OfferLoad/OfferLoad.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>net.masterthought</groupId>
+						<artifactId>maven-cucumber-reporting</artifactId>
+						<version>3.8.0</version>
+						<executions>
+							<execution>
+								<id>execution</id>
+								<phase>test</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<projectName>CucumberReportOfferSearch</projectName>
+									<outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
+									<cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 
 </project>

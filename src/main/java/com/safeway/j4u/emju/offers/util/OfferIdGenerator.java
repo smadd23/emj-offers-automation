@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 public class OfferIdGenerator {
 
 	public long generateOfferId() {
-
 		UUID uuid = UUID.randomUUID();
 		log.debug(" uuid value = " +uuid);
 		long hash = Math.abs(Hashing.murmur3_128(Integer.valueOf(uuid.hashCode())).hashCode());
