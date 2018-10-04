@@ -1,6 +1,7 @@
 package com.safeway.j4u.emju.offers.model;
 
 import java.util.Map;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +17,8 @@ public class Description {
 	private String priceTitle;
 	private String priceValue;
 	private String savingsValueText;
-	private Map<String, String> titleDescription;
-	private Map<String, String> productDescription;
+	private Map<@NotNull String, @NotNull String> titleDescription;
+	private Map<@NotNull String, @NotNull String> productDescription;
 	private String disclaimerText;
 	private String receiptDescriptions;
 }

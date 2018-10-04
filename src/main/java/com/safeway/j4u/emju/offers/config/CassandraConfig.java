@@ -1,7 +1,10 @@
 package com.safeway.j4u.emju.offers.config;
 
+import static java.util.Objects.nonNull;
+
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.QueryLogger;
+import com.datastax.driver.core.Session;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -55,20 +58,21 @@ public class CassandraConfig extends AbstractReactiveCassandraConfiguration {
 	
 	@Value("${spring.data.cassandra.keyspace-name}")
 	private String cassandraKeyspace;
-	
+
 	@PostConstruct
 	public void migrateDbChanges() throws URISyntaxException, IOException {
 		debugQueryLog();
 		URI uri = getClass().getResource("/cql").toURI();
 		Path cqlScriptsFolder;
 		if (uri.getScheme().equals("jar")) {
-            FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
-            cqlScriptsFolder = fileSystem.getPath("BOOT-INF/classes/cql");
-        } else {
-        	cqlScriptsFolder = Paths.get(uri);
-        }
+			FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+			cqlScriptsFolder = fileSystem.getPath("BOOT-INF/classes/cql");
+		} else {
+			cqlScriptsFolder = Paths.get(uri);
+		}
 		List<Path> cqlScriptsFoldersList = new ArrayList<Path>();
 		cqlScriptsFoldersList.add(cqlScriptsFolder);
+		cqlMigratePrerequisite();
 		CassandraLockConfig lockConfig = CassandraLockConfig.builder().withTimeout(Duration.ofSeconds(10))
 				.withPollingInterval(Duration.ofMillis(500)).build();
 		CqlMigrator migrator = CqlMigratorFactory.create(lockConfig);
@@ -144,4 +148,22 @@ public class CassandraConfig extends AbstractReactiveCassandraConfiguration {
 		}
 	}
 
+	private void cqlMigratePrerequisite() {
+		Session session = null;
+		try {
+			Cluster cluster = CassandraClusterFactory.createCluster(this.cassandraHost.split(","), Integer.parseInt(this.cassandraPort), this.cassandraUserName,
+					this.cassandraPassword);
+			session = cluster.connect();
+			session.execute("CREATE KEYSPACE IF NOT EXISTS cqlmigrate WITH replication = { 'class': 'SimpleStrategy', 'replication_factor': '1' }");
+			session.execute("CREATE TABLE IF NOT EXISTS cqlmigrate.locks (name text PRIMARY KEY, client text)");
+			session.execute("CREATE KEYSPACE IF NOT EXISTS offers WITH replication = { 'class':'SimpleStrategy', 'replication_factor': '1' }");
+		}
+		catch(Exception e) {
+			log.info("Truncate lock failed");
+		}
+		finally {
+			if (nonNull(session))
+				session.close();
+		}
+	}
 }

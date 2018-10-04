@@ -1,9 +1,8 @@
 package com.safeway.j4u.emju.offers.model;
 
 import java.util.Map;
-
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,17 +14,15 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode
 @Builder
-//@Validated
 public class Info {
 	private Id id;
 	private String offerProviderName;
-	private Map<String, String> categories; 
-	private Map<String, String> primaryCategory;
-	private Map<String, String> events;
+	private Map<@NotNull String, @NotNull String> categories;
+	private Map<@NotNull String, @NotNull String> primaryCategory;
+	private Map<@NotNull String, @NotNull String> events;
 	@NotNull
 	private ProgramCodeType offerProgramCode; 
 	private String offerSubProgram;
-	@NotNull
 	private StatusType offerStatus; 
 	private Description description;
 	private String productImageId;
@@ -35,5 +32,6 @@ public class Info {
 	private String offerProgramType;
 	private Boolean shouldReportRedemptions;
 	private String promoClassId;
+	@Valid
 	private AuditInfo auditInfo; 
 }

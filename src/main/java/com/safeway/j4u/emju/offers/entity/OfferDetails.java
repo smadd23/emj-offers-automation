@@ -17,7 +17,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode
-@Builder
+@Builder(toBuilder=true)
 @Table("offer_details")
 public class OfferDetails {
 
@@ -31,10 +31,16 @@ public class OfferDetails {
 	private String offerProviderName;
 	@Column("categories")
 	private Map<String, String> categories;
+	@Column("categories_set")
+	private Set<String> categoriesSet;
 	@Column("primary_category")
 	private Map<String, String> primaryCategory;
+	@Column("primary_category_set")
+	private Set<String> primaryCategorySet;
 	@Column("events")
 	private Map<String, String> events;
+	@Column("events_set")
+	private Set<String> eventsSet;
 	@Column("offer_program_cd")
 	private String offerProgramCode;
 	@Column("offer_sub_program")
@@ -49,8 +55,12 @@ public class OfferDetails {
 	private String savingsValueText;
 	@Column("title_desc")
 	private Map<String, String> titleDescription;
+	@Column("title_desc_set")
+	private Set<String> titleDescriptionSet;
 	@Column("product_desc")
 	private Map<String, String> productDescription;
+	@Column("product_desc_set")
+	private Set<String> productDescriptionSet;
 	@Column("disclaimer_txt")
 	private String disclaimerText;
 	@Column("receipt_descriptions")
@@ -95,6 +105,8 @@ public class OfferDetails {
 	private ZonedDateTime offerTestEffectiveEndDate;
 	@Column("divisions")
 	private Map<String, String> divisions;
+	@Column("divisions_set")
+	private Set<String> divisionsSet;
 	@Column("store_groups")
 	private Set<String> storeGroups;
 	@Column("store_ids")
@@ -102,7 +114,7 @@ public class OfferDetails {
 	@Column("postal_codes")
 	private Set<Integer> postalCodes;
 	@Column("upcs")
-	private Set<Integer> upcs;
+	private Set<Long> upcs;
 	@Column("terminals")
 	private Set<String> terminals;
 	@Column("qualification_unit_type")
@@ -123,6 +135,8 @@ public class OfferDetails {
 	private Boolean isBuyXGetYOffer;
 	@Column("banners")
 	private Map<String, String> banners;
+	@Column("banners_set")
+	private Set<String> bannersSet;
 	@Column("channels")
 	private Set<String> channels;
 	@Column("min_order_total_amount")

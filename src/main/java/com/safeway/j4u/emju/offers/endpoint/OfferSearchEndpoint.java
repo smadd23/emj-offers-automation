@@ -1,40 +1,54 @@
 package com.safeway.j4u.emju.offers.endpoint;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static com.safeway.j4u.emju.offers.util.OffersConstants.API_OFFERS_ROOT;
+import static com.safeway.j4u.emju.offers.util.OffersConstants.APPLICATION_VND_SAFEWAY_V1_JSON;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.util.StringUtils.isEmpty;
 
+import com.safeway.j4u.emju.offers.model.PaginatedOffer;
+import com.safeway.j4u.emju.offers.model.SearchCountCriteria;
+import com.safeway.j4u.emju.offers.service.OffersSearchService;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.safeway.j4u.emju.offers.mapper.OfferSearchCriteriaKeyMapper;
-import com.safeway.j4u.emju.offers.model.Offer;
-import com.safeway.j4u.emju.offers.model.OfferSearchCriteria;
-import com.safeway.j4u.emju.offers.service.OffersSearchService;
-
-import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/offer")
+@RequestMapping(path = API_OFFERS_ROOT, consumes=APPLICATION_VND_SAFEWAY_V1_JSON, produces=APPLICATION_VND_SAFEWAY_V1_JSON)
 public class OfferSearchEndpoint {
 
-	private OffersSearchService offersService;
+  private OffersSearchService offersService;
 
-	@Autowired
-	public OfferSearchEndpoint(OffersSearchService offersService) {
-		this.offersService = offersService;
-	}
+  @Value("${offer.search.query.maxLength:2000}")
+  private int queryLength;
 
-	@GetMapping(path = "", produces = "application/json;charset=UTF-8")
-	public Flux<Offer> search(@RequestParam(value = "q") String search) {
+  @Autowired
+  public OfferSearchEndpoint(OffersSearchService offersService) {
+    this.offersService = offersService;
+  }
 
-		return offersService.searchOffers(search);
-	}
+  @GetMapping
+  public Mono<PaginatedOffer> search(@RequestParam(value = "q") String search,
+      @RequestParam(value = "includeFacetCounts", required = false, defaultValue = "false") boolean includeFacetCounts,
+      @RequestParam(value = "includeTotalCount", required = false, defaultValue = "true") boolean includeTotalCount,
+      ServerHttpRequest serverHttpRequest) {
+    Set<String> allowed = new HashSet<>(Arrays.asList("q", "includeFacetCounts", "includeTotalCount"));
+    if (!allowed.containsAll(serverHttpRequest.getQueryParams().keySet())) {
+      throw new ResponseStatusException(BAD_REQUEST,"Invalid Request: Unknown params.");
+    } else if (isEmpty(search) || search.length() > queryLength) {
+      throw new ResponseStatusException(BAD_REQUEST,
+          "Invalid Request: Query must not be empty and length must not exceed " + queryLength
+              + "characters");
+    }
 
+    return offersService.searchOffers(search, new SearchCountCriteria(includeFacetCounts, includeTotalCount));
+  }
 }

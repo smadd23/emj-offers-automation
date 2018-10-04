@@ -4,6 +4,7 @@ import static com.safeway.j4u.emju.offers.util.OffersConstants.ISO_OFFSET_DATE_T
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,13 +16,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Builder
+@Builder(toBuilder=true)
 @Data
 public class EndDate {
+	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ISO_OFFSET_DATE_TIME)
 	private ZonedDateTime displayEffectiveEndDate;
+	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ISO_OFFSET_DATE_TIME)
 	private ZonedDateTime offerEffectiveEndDate;
+	// @NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ISO_OFFSET_DATE_TIME)
 	private ZonedDateTime offerTestEffectiveEndDate;
 }

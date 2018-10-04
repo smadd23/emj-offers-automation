@@ -1,11 +1,5 @@
 package com.safeway.j4u.emju.offers.helpers;
 
-import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -13,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.base.Optional;
+import com.safeway.j4u.emju.offers.entity.OfferDetails;
 import com.safeway.j4u.emju.offers.model.ApplicableTo;
 import com.safeway.j4u.emju.offers.model.Benefit;
 import com.safeway.j4u.emju.offers.model.BenefitValueType;
@@ -30,6 +25,11 @@ import com.safeway.j4u.emju.offers.model.StartDate;
 import com.safeway.j4u.emju.offers.model.StatusType;
 import com.safeway.j4u.emju.offers.model.UsageLimitType;
 import com.safeway.j4u.emju.offers.model.UsageLimits;
+import java.io.IOException;
+import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class OfferHelper {
 
@@ -45,7 +45,7 @@ public class OfferHelper {
 
 		try {
 			System.out.println(mapper.writerWithDefaultPrettyPrinter()
-					.writeValueAsString(createSCOfferSendByOMSDuringPromoteToPreview("2510N0817H05_820001", null)));
+					.writeValueAsString(createSCOfferSendByOMSDuringPromoteToPreview("2510N0817H05_820001", null, StatusType.A)));
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
@@ -95,6 +95,21 @@ public class OfferHelper {
 		info.setShouldReportRedemptions(true);
 		info.setPromoClassId("89");
 		info.setPriceCode(priceCode);
+		info.setCategories(new HashMap<String, String>() {
+			{
+				put("8", "Dairy, Eggs & Cheese");
+			}
+		});
+		info.setPrimaryCategory(new HashMap<String, String>() {
+			{
+				put("8", "Dairy, Eggs & Cheese");
+			}
+		});
+		info.setEvents(new HashMap<String, String>() {
+			{
+				put("125", "Weekly Ad Coupons");
+			}
+		});
 		offer.setInfo(info);
 		Rules rules = new Rules();
 		StartDate startDate = new StartDate();
@@ -118,6 +133,16 @@ public class OfferHelper {
 		applicableTo.setTerminals(new HashSet<String>() {
 			{
 				add("11401");
+			}
+		});
+		applicableTo.setDivisions(new HashMap<String, String>() {
+			{
+				put("24", "NORCAL");
+			}
+		});
+		applicableTo.setStoreGroups(new HashSet<String>() {
+			{
+				add("7642");
 			}
 		});
 		applicableTo.setPostalCodes(postalCodes);
@@ -148,7 +173,7 @@ public class OfferHelper {
 		return offer;
 	}
 
-	public static Offer createSCOfferSendByOMSDuringPromoteToPreview(String externalOfferId, Long offerId) {
+	public static Offer createSCOfferSendByOMSDuringPromoteToPreview(String externalOfferId, Long offerId, StatusType statusType) {
 		Offer offer = new Offer();
 		Info info = new Info();
 		Id id = new Id();
@@ -163,10 +188,16 @@ public class OfferHelper {
 			{
 				put("8", "Dairy, Eggs & Cheese");
 			}
+			{
+				put("9", "Test 1");
+			}
 		});
 		info.setPrimaryCategory(new HashMap<String, String>() {
 			{
 				put("8", "Dairy, Eggs & Cheese");
+			}
+			{
+				put("9", "Test 1");
 			}
 		});
 		info.setEvents(new HashMap<String, String>() {
@@ -197,6 +228,7 @@ public class OfferHelper {
 		info.setIsDefaultAllocationOffer(Boolean.FALSE);
 		info.setShouldReportRedemptions(true);
 		info.setPromoClassId("89");
+		info.setOfferStatus(statusType);
 		offer.setInfo(info);
 		Rules rules = new Rules();
 		StartDate startDate = new StartDate();
@@ -259,5 +291,29 @@ public class OfferHelper {
 		rules.setUsageLimits(usageLimits);
 		offer.setRules(rules);
 		return offer;
+	}
+	
+	public static OfferDetails createOfferDetails(String externalOfferId, Long offerId,
+			ProgramCodeType offerType, StatusType statusType, String startDt, String endDt, String priceCode,
+			Set<Integer> postalCodes, Set<String> storeIds)
+	{
+		OfferDetails offerDetails = new OfferDetails();
+		offerDetails.setOfferId(offerId);
+		offerDetails.setExternalOfferId(externalOfferId);
+		
+		offerDetails.setCategories(new HashMap<String, String>() {{ put("1", "Personal Care & Health"); put("2", "Garbge-bell soup");}});
+		offerDetails.setPrimaryCategory(new HashMap<String, String>() {{ put("1", "Frozen");}});
+		
+		offerDetails.setOfferProgramCode(offerType.name());
+		offerDetails.setOfferStatus(statusType.toString());
+		offerDetails.setPriceCode(priceCode);
+		
+		offerDetails.setOfferEffectiveStartDate(ZonedDateTime.parse(startDt));
+		offerDetails.setOfferEffectiveEndDate(ZonedDateTime.parse(endDt));
+		
+		offerDetails.setStoreIds(storeIds);
+		offerDetails.setPostalCodes(postalCodes);
+
+		return offerDetails;
 	}
 }
