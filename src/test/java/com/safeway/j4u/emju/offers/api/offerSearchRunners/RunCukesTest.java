@@ -1,8 +1,6 @@
-
-
 package com.safeway.j4u.emju.offers.api.offerSearchRunners;
 
-        import cucumber.api.CucumberOptions;
+import cucumber.api.CucumberOptions;
         import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(

@@ -1,7 +1,7 @@
 Feature: OfferSearch "Parent & Child Parameters" Test Scenarios with "NO AUTH"
   Background: Set up Environment for Testing
     Given The Test Environment is Defined
-      |currentTestEnvironemnt|dev  |
+      |currentTestEnvironment|dev  |
       |apiGroupName|offerSearchRunners|
       |apiName|get_offersByParentParams|
     And Parameters are intialized

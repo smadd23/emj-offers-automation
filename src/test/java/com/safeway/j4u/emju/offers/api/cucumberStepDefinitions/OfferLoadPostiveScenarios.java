@@ -31,89 +31,36 @@ public class OfferLoadPostiveScenarios extends BaseApiTest {
   public Response response;
   private Map<String, String> env;
 
-  /** Initialize before each test. */
-  @BeforeClass(alwaysRun = true)
-  @Given("^The Test Environment is Defined for POST call$")
-  public void beforeMethod(Map<String, String> env) throws Exception {
-    this.env = env;
-    String currentTestEnv = env.get("currentTestEnvironment");
-    String apiGroupName = env.get("apiGroupName");
-    String apiName = env.get("apiName");
-    setupSuite(currentTestEnv, apiGroupName, apiName);
-  }
-  /** Initialize before each test. */
-  @BeforeMethod(alwaysRun = true)
-  @And("^Parameters are intialized$")
-  public void parametersAreIntialized() {
-    headerParams = new HashMap<String, Object>();
-    authenticatedGalleryEndpoint =
-        dataExtractor.getTestEnvironmentEndPoint(GlobalConstants.testEnvironment);
-  }
 
   @When("^Business User loads data with offerstatus A$")
   public void businessUserLoadsDataWithOfferStatusA(List<String> methodName) {
     testCaseName = methodName.get(0);
-    headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    headerParams.put(GlobalConstants.ACCEPT, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    authenticatedGalleryEndpoint += ResourceEndpointUri.OFFER_SEARCH;
   }
 
-  @Test()
-  @Then("^API Response is extracted$")
-  public void apiResponseIsExtracted() {
-    File bodyFile = new File(JSON_BODYDATA_PATH + testCaseName);
-    response =
-        invokeService(
-            HTTPMethod.POST,
-             authenticatedGalleryEndpoint,
-            null,
-            null,
-            headerParams,
-            null,
-            GlobalConstants.GetCallArgs.HEADERPARAM.toString(),
-            null,
-            bodyFile);
-  }
-
-  @Test()
-  @And("^API Response is asserted for Success Status Code$")
-  public void assertStatusCode() {
-    Assert.assertEquals(response.getStatusCode(), HttpStatus.SC_CREATED);
-  }
   @When("^Business User loads data with offerstatus A with Future dates$")
   public void businessUserLoadsDataWithOfferStatusAWithFutureDates(List<String> methodName) {
     testCaseName = methodName.get(0);
-    headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    headerParams.put(GlobalConstants.ACCEPT, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    authenticatedGalleryEndpoint += ResourceEndpointUri.OFFER_SEARCH;
   }
   @When("^Business User loads data with offerstatus D$")
   public void businessUserLoadsDataWithOfferStatusD(List<String> methodName) {
     testCaseName = methodName.get(0);
-    headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    headerParams.put(GlobalConstants.ACCEPT, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    authenticatedGalleryEndpoint += ResourceEndpointUri.OFFER_SEARCH;
   }
+
   @When("^Business User loads data with offerstatus E$")
   public void businessUserLoadsDataWithOfferStatusE(List<String> methodName) {
     testCaseName = methodName.get(0);
-    headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    headerParams.put(GlobalConstants.ACCEPT, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    authenticatedGalleryEndpoint += ResourceEndpointUri.OFFER_SEARCH;
+
   }
   @When("^Business User loads data with offerstatus L$")
   public void businessUserLoadsDataWithOfferStatusL(List<String> methodName) {
     testCaseName = methodName.get(0);
-    headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    headerParams.put(GlobalConstants.ACCEPT, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    authenticatedGalleryEndpoint += ResourceEndpointUri.OFFER_SEARCH;
   }
+
+  @When("^Business User loads <ALL> offers with offerstatus A$")
+  public void businessUserLoadsALLOffersWithOfferstatusA(List<String> methodName) {testCaseName = methodName.get(0);}
 //  @When("^User loads maximum no of offers using the Offer Load API$")
 //  public void businessUserLoadsDataWithMaxnoofOffers(List<String> methodName) {
 //    testCaseName = methodName.get(0);
-//    headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-//    headerParams.put(GlobalConstants.ACCEPT, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-//    authenticatedGalleryEndpoint += ResourceEndpointUri.OFFER_SEARCH;
 //  }
 
 }

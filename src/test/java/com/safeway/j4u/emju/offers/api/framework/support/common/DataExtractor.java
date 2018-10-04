@@ -31,7 +31,6 @@ public class DataExtractor {
    */
   public JSONArray getJSONParseTestData(
       String testEnvironment, String apiGroupName, String apiName, String testScriptName) {
-
     String filePath = null;
     // Get current OS Name and path for Test Data
     try {
