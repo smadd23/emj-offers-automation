@@ -12,12 +12,6 @@ Feature: Offer Load NegativeTest Scenarios with NO AUTH
     Then API Response is extracted for POST call
     Then API Response is asserted as Status Code Bad Request
 
-  Scenario: Load offer with null AggregatOfferId
-    When  Business user loads Offer with null AggregateOfferId
-      |OffercheckwithnullAggregateOfferId.json|
-    Then API Response is extracted for POST call
-    Then API Response is asserted as Status Code Bad Request
-
   Scenario: Load  Offer with null ExternalOfferId
     When Business user loads offer with null ExternalOfferId
       |OffercheckwithnullExternalOfferId.json|
@@ -33,18 +27,6 @@ Feature: Offer Load NegativeTest Scenarios with NO AUTH
   Scenario: Load  Offer with null programcode
     When Business User loads data with null programcode
       |OffercheckwithnullProgramcode.json|
-    Then API Response is extracted for POST call
-    Then API Response is asserted as Status Code Bad Request
-
-  Scenario: Load  Offer with SpecialCharectors for AggregateOfferID
-    When Business User loads data with SpecialCharectors for AggregateOfferID
-      |OfferwithAggregateIdasSpecialCharectors.json|
-    Then API Response is extracted for POST call
-    Then API Response is asserted as Status Code Bad Request
-
-  Scenario: Load  Offer with SpecialCharectors for ExternalOfferID
-    When Business User loads data with SpecialCharectors for ExternalOfferID
-      |OfferWithExternalOfferIdasSpecialCharectors.json|
     Then API Response is extracted for POST call
     Then API Response is asserted as Status Code Bad Request
 

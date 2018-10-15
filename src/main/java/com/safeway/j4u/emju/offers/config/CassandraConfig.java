@@ -2,7 +2,9 @@ package com.safeway.j4u.emju.offers.config;
 
 import static java.util.Objects.nonNull;
 
+import com.datastax.driver.core.AuthProvider;
 import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.PlainTextAuthProvider;
 import com.datastax.driver.core.QueryLogger;
 import com.datastax.driver.core.Session;
 import java.io.IOException;
@@ -86,13 +88,21 @@ public class CassandraConfig extends AbstractReactiveCassandraConfiguration {
 		return this.cassandraKeyspace;
 	}	
 	
-	public String getContactPoints() {
+	@Override
+	protected String getContactPoints() {
 		return this.cassandraHost;
 	}
 	
-	public int getPort() {
+	@Override
+	protected int getPort() {
 		return new Integer(this.cassandraPort);
 	}
+	
+	@Override
+	protected AuthProvider getAuthProvider() {
+		return new PlainTextAuthProvider(cassandraUserName, cassandraPassword);
+	}
+	
 
 	@ReadingConverter
 	private enum DateToZonedDateTime implements Converter<Date, ZonedDateTime> {

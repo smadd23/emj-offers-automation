@@ -2,20 +2,18 @@ package com.safeway.j4u.emju.offers.api.framework.support.common;
 
 import static com.safeway.j4u.emju.offers.api.framework.support.constants.ResourceEndpointUri.SLASH_DELIMITER;
 import static io.restassured.RestAssured.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.urlfetch.HTTPMethod;
 import com.google.appengine.repackaged.com.google.gson.JsonObject;
 import com.google.appengine.repackaged.com.google.gson.JsonParser;
 import com.safeway.j4u.emju.offers.api.framework.support.constants.GlobalConstants;
-
+import com.safeway.j4u.emju.offers.api.framework.support.constants.ResourceEndpointUri;
 import io.restassured.RestAssured;
 import io.restassured.config.SSLConfig;
+import io.restassured.internal.http.URIBuilder;
 import io.restassured.response.Response;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +22,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.http.MediaType;
 import org.testng.Assert;
 
 /** Class contains all operations related to RestAssured Calls. */
@@ -40,6 +39,7 @@ public class BaseApiTest extends ConfigTestBase {
   protected JSONObject appAuthEnvDataJsonObject;
   protected String expectedJsonString;
   protected static  String authenticatedGalleryEndpoint;
+  protected static Object searchId ;
   protected String apiEndPoint;
   protected JsonObject expectedJsonObject;
   protected JsonObject actualJsonObject;
@@ -47,11 +47,13 @@ public class BaseApiTest extends ConfigTestBase {
   protected static Map<String, Object> queryParams;
   protected static Map<String, Object> headerParams;
   protected Map<String, Object> formParams;
-  protected Map<String, Object> pathParams;
+  protected static Map<String, Object> pathParams;
   protected List<String> pathParam;
   protected List<String> pathParamsNames;
   protected static String testCaseName;
   public static Response response = null;
+
+
   /**
    * Invokes the service using Rest-Assured API's.
    *
@@ -66,84 +68,83 @@ public class BaseApiTest extends ConfigTestBase {
    * @return the response from the endpoint
    */
   public Response invokeService(
-      HTTPMethod methodType,
-      String restServiceUri,
-      Map<String, Object> queryParams,
-      Map<String, Object> pathParams,
-      Map<String, Object> headerParams,
-      Map<String, Object> formParams,
-      String getCallParamsProcess,
-      List<String> pathParamsNames,
-      File bodyDataFile) {
+          HTTPMethod methodType,
+          String restServiceUri,
+          Map<String, Object> queryParams,
+          Map<String, Object> pathParams,
+          Map<String, Object> headerParams,
+          Map<String, Object> formParams,
+          String getCallParamsProcess,
+          List<String> pathParamsNames,
+          File bodyDataFile) {
 
-    //RestAssured.useRelaxedHTTPSValidation();
+    RestAssured.useRelaxedHTTPSValidation();
     RestAssured.urlEncodingEnabled = false;
-    //resetProxy();
+    resetProxy();
     switch (methodType) {
       case GET:
         if (getCallParamsProcess.equalsIgnoreCase("query")) {
-
           response =
-              given().params(queryParams).when().get(restServiceUri).then().extract().response();
+                  given().params(queryParams).when().get(restServiceUri).then().extract().response();
         } else if (getCallParamsProcess.equalsIgnoreCase("headers")) {
           response =
-              given().headers(headerParams).when().get(restServiceUri).then().extract().response();
-
+                  given().urlEncodingEnabled(false).headers(headerParams).params(pathParams).
+                          when().get(restServiceUri).then().log().status().extract().response();
         } else if (getCallParamsProcess.equalsIgnoreCase("path")) {
           // Below is the method call to append {storeId} to RequestURI
           restServiceUri = buildPathParameter(restServiceUri, pathParamsNames);
           response =
-              given().pathParams(pathParams).when().get(restServiceUri).then().extract().response();
+                  given().pathParams(pathParams).when().get(restServiceUri).then().extract().response();
         } else if (getCallParamsProcess.equalsIgnoreCase("QueryHeaders")) {
           response =
-              given()
-                  .params(queryParams)
-                  .proxy(restServiceUri)
-                  .headers(headerParams)
-                  .when()
-                  .get(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .params(queryParams)
+                          .proxy(restServiceUri)
+                          .headers(headerParams)
+                          .when()
+                          .get(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         } else if (getCallParamsProcess.equalsIgnoreCase("QueryPath")) {
           // Below is the method call to append {storeId} to RequestURI
           restServiceUri = buildPathParameter(restServiceUri, pathParamsNames);
           response =
-              given()
-                  .params(queryParams)
-                  .pathParams(pathParams)
-                  .when()
-                  .get(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .params(queryParams)
+                          .pathParams(pathParams)
+                          .when()
+                          .get(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         } else if (getCallParamsProcess.equalsIgnoreCase("PathHeaders")) {
           // Below is the method call to append {storeId} to RequestURI
           restServiceUri = buildPathParameter(restServiceUri, pathParamsNames);
           response =
-              given()
-                  .pathParams(pathParams)
-                  .headers(headerParams)
-                  .when()
-                  .get(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .pathParams(pathParams)
+                          .headers(headerParams)
+                          .when()
+                          .get(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         } else if (getCallParamsProcess.equalsIgnoreCase("AllParams")) {
 
           // Below is the method call to append {storeId} to RequestURI
           restServiceUri = buildPathParameter(restServiceUri, pathParamsNames);
           response =
-              given()
-                  .pathParams(pathParams)
-                  .params(queryParams)
-                  .headers(headerParams)
-                  .when()
-                  .config(config)
-                  .get(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .pathParams(pathParams)
+                          .params(queryParams)
+                          .headers(headerParams)
+                          .when()
+                          .config(config)
+                          .get(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         } else if (getCallParamsProcess.equalsIgnoreCase("NoParams")) {
           response = given().proxy(restServiceUri).get(restServiceUri).then().extract().response();
         }
@@ -152,91 +153,91 @@ public class BaseApiTest extends ConfigTestBase {
       case POST:
         if (getCallParamsProcess.equalsIgnoreCase("query")) {
           response =
-              given()
-                  .queryParams(queryParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .post(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .queryParams(queryParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .post(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         } else if (getCallParamsProcess.equalsIgnoreCase("headers")) {
           response =
-              given()
-                  .headers(headerParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .post(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .headers(headerParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .post(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         } else if (getCallParamsProcess.equalsIgnoreCase("formparams")) {
           response =
-              given()
-                  .headers(headerParams)
-                  .formParams(formParams)
-                  .when()
-                  .post(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .headers(headerParams)
+                          .formParams(formParams)
+                          .when()
+                          .post(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
 
         } else if (getCallParamsProcess.equalsIgnoreCase("path")) {
           restServiceUri =
-              buildPathParameter(
-                  restServiceUri, pathParamsNames); // to build path string in the url
+                  buildPathParameter(
+                          restServiceUri, pathParamsNames); // to build path string in the url
           response =
-              given()
-                  .pathParams(pathParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .post(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .pathParams(pathParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .post(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
 
         } else if (getCallParamsProcess.equalsIgnoreCase("QueryHeaders")) {
 
           response =
-              given()
-                  .headers(headerParams)
-                  .queryParams(queryParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .post(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .headers(headerParams)
+                          .queryParams(queryParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .post(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
 
         } else if (getCallParamsProcess.equalsIgnoreCase("QueryPath")) {
           restServiceUri =
-              buildPathParameter(
-                  restServiceUri, pathParamsNames); // to build path string in the url
+                  buildPathParameter(
+                          restServiceUri, pathParamsNames); // to build path string in the url
           response =
-              given()
-                  .queryParams(queryParams)
-                  .pathParams(pathParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .post(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .queryParams(queryParams)
+                          .pathParams(pathParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .post(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
 
         } else if (getCallParamsProcess.equalsIgnoreCase("PathHeaders")) {
           restServiceUri =
-              buildPathParameter(
-                  restServiceUri, pathParamsNames); // to build path string in the url
+                  buildPathParameter(
+                          restServiceUri, pathParamsNames); // to build path string in the url
           response =
-              given()
-                  .headers(headerParams)
-                  .pathParams(pathParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .post(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .headers(headerParams)
+                          .pathParams(pathParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .post(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         }
         break;
       case HEAD:
@@ -245,84 +246,84 @@ public class BaseApiTest extends ConfigTestBase {
       case PUT:
         if (getCallParamsProcess.equalsIgnoreCase("headers")) {
           response =
-              given()
-                  .headers(headerParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .put(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .headers(headerParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .put(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         }
         break;
 
       case DELETE:
         if (getCallParamsProcess.equalsIgnoreCase("headers")) {
           response =
-              given()
-                  .headers(headerParams)
-                  .when()
-                  .delete(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .headers(headerParams)
+                          .when()
+                          .delete(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
         }
         break;
 
       case PATCH:
         if (getCallParamsProcess.equalsIgnoreCase("query")) {
           response =
-              given().queryParams(queryParams).body(bodyDataFile).when().patch(restServiceUri);
+                  given().queryParams(queryParams).body(bodyDataFile).when().patch(restServiceUri);
         } else if (getCallParamsProcess.equalsIgnoreCase("headers")) {
           response =
-              given()
-                  .headers(headerParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .patch(restServiceUri)
-                  .then()
-                  .extract()
-                  .response();
+                  given()
+                          .headers(headerParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .patch(restServiceUri)
+                          .then()
+                          .extract()
+                          .response();
 
         } else if (getCallParamsProcess.equalsIgnoreCase("path")) {
           restServiceUri =
-              buildPathParameter(
-                  restServiceUri, pathParamsNames); // to build path string in the url
+                  buildPathParameter(
+                          restServiceUri, pathParamsNames); // to build path string in the url
           response = given().pathParams(pathParams).body(bodyDataFile).when().patch(restServiceUri);
 
         } else if (getCallParamsProcess.equalsIgnoreCase("QueryHeaders")) {
 
           response =
-              given()
-                  .headers(headerParams)
-                  .queryParams(queryParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .patch(restServiceUri);
+                  given()
+                          .headers(headerParams)
+                          .queryParams(queryParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .patch(restServiceUri);
 
         } else if (getCallParamsProcess.equalsIgnoreCase("QueryPath")) {
           restServiceUri =
-              buildPathParameter(
-                  restServiceUri, pathParamsNames); // to build path string in the url
+                  buildPathParameter(
+                          restServiceUri, pathParamsNames); // to build path string in the url
           response =
-              given()
-                  .queryParams(queryParams)
-                  .pathParams(pathParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .patch(restServiceUri);
+                  given()
+                          .queryParams(queryParams)
+                          .pathParams(pathParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .patch(restServiceUri);
 
         } else if (getCallParamsProcess.equalsIgnoreCase("PathHeaders")) {
           restServiceUri =
-              buildPathParameter(
-                  restServiceUri, pathParamsNames); // to build path string in the url
+                  buildPathParameter(
+                          restServiceUri, pathParamsNames); // to build path string in the url
           response =
-              given()
-                  .headers(headerParams)
-                  .pathParams(pathParams)
-                  .body(bodyDataFile)
-                  .when()
-                  .patch(restServiceUri);
+                  given()
+                          .headers(headerParams)
+                          .pathParams(pathParams)
+                          .body(bodyDataFile)
+                          .when()
+                          .patch(restServiceUri);
         }
         break;
       default:
@@ -390,10 +391,10 @@ public class BaseApiTest extends ConfigTestBase {
    */
   protected String getAuthToken(String username, String password) {
     tokenJsonDataObj =
-        dataExtractor.getJSONParseTokenTestData(
-            GlobalConstants.testEnvironment,
-            globalConstants.tokenServiceGroupName,
-            globalConstants.tokenServiceApiName);
+            dataExtractor.getJSONParseTokenTestData(
+                    GlobalConstants.testEnvironment,
+                    globalConstants.tokenServiceGroupName,
+                    globalConstants.tokenServiceApiName);
     return (getTokenId(tokenJsonDataObj, username, password));
   }
 
@@ -406,15 +407,15 @@ public class BaseApiTest extends ConfigTestBase {
   private String getTokenId(JSONObject tokenDataJsonObj, String username, String password) {
     RestAssured.reset();
     Response response =
-        given()
-            .param("username", username)
-            .param("password", password)
-            .when()
-            .post(tokenDataJsonObj.get("uri").toString())
-            .then()
-            .statusCode(200)
-            .extract()
-            .response();
+            given()
+                    .param("username", username)
+                    .param("password", password)
+                    .when()
+                    .post(tokenDataJsonObj.get("uri").toString())
+                    .then()
+                    .statusCode(200)
+                    .extract()
+                    .response();
     return response.getBody().asString().substring(9).trim();
   }
 
@@ -428,10 +429,10 @@ public class BaseApiTest extends ConfigTestBase {
   protected String getOktaToken(String username, String password) {
     resetProxy();
     tokenJsonDataObj =
-        dataExtractor.getJSONParseTokenTestData(
-            GlobalConstants.testEnvironment,
-            globalConstants.tokenServiceGroupName,
-            globalConstants.tokenServiceApiName);
+            dataExtractor.getJSONParseTokenTestData(
+                    GlobalConstants.testEnvironment,
+                    globalConstants.tokenServiceGroupName,
+                    globalConstants.tokenServiceApiName);
     switch (GlobalConstants.testEnvironment.toUpperCase()) {
       case "QAI":
         tokenId = getOktaTokenIdQai(tokenJsonDataObj, username, password);
@@ -454,31 +455,31 @@ public class BaseApiTest extends ConfigTestBase {
   private String getOktaTokenId(JSONObject tokenDataJsonObj, String username, String password) {
 
     Response response =
-        given()
-            .auth()
-            .preemptive()
-            .basic(
-                tokenDataJsonObj.get("ClientId").toString(),
-                tokenDataJsonObj.get("ClientSecret").toString())
-            .headers(
-                "Accept",
-                tokenDataJsonObj.get("Accept").toString(),
-                "Content-Type",
-                "application/x-www-form-urlencoded")
-            .formParams(
-                "grant_type",
-                tokenDataJsonObj.get("grant_type").toString(),
-                "username",
-                username,
-                "password",
-                password,
-                "scope",
-                tokenDataJsonObj.get("scope").toString())
-            .when()
-            .post(tokenDataJsonObj.get("uri").toString())
-            .then()
-            .extract()
-            .response();
+            given()
+                    .auth()
+                    .preemptive()
+                    .basic(
+                            tokenDataJsonObj.get("ClientId").toString(),
+                            tokenDataJsonObj.get("ClientSecret").toString())
+                    .headers(
+                            "Accept",
+                            tokenDataJsonObj.get("Accept").toString(),
+                            "Content-Type",
+                            "application/x-www-form-urlencoded")
+                    .formParams(
+                            "grant_type",
+                            tokenDataJsonObj.get("grant_type").toString(),
+                            "username",
+                            username,
+                            "password",
+                            password,
+                            "scope",
+                            tokenDataJsonObj.get("scope").toString())
+                    .when()
+                    .post(tokenDataJsonObj.get("uri").toString())
+                    .then()
+                    .extract()
+                    .response();
     return response.getBody().jsonPath().getString("access_token");
   }
 
@@ -498,18 +499,18 @@ public class BaseApiTest extends ConfigTestBase {
     hashMap.put("source", "WEB");
     hashMap.put("banner", "tomthumb");
     Response response =
-        given()
-            .relaxedHTTPSValidation()
-            .headers(
-                GlobalConstants.ACCEPT, tokenDataJsonObj.get("Accept").toString(),
-                GlobalConstants.CONTENTTYPE, tokenDataJsonObj.get("Content").toString(),
-                GlobalConstants.BANNERID, tokenDataJsonObj.get("x-swy_banner").toString())
-            .body(hashMap)
-            .when()
-            .post(tokenDataJsonObj.get("uri").toString())
-            .then()
-            .extract()
-            .response();
+            given()
+                    .relaxedHTTPSValidation()
+                    .headers(
+                            GlobalConstants.ACCEPT, tokenDataJsonObj.get("Accept").toString(),
+                            GlobalConstants.CONTENTTYPE, tokenDataJsonObj.get("Content").toString(),
+                            GlobalConstants.BANNERID, tokenDataJsonObj.get("x-swy_banner").toString())
+                    .body(hashMap)
+                    .when()
+                    .post(tokenDataJsonObj.get("uri").toString())
+                    .then()
+                    .extract()
+                    .response();
     return response.getBody().jsonPath().getString("token");
   }
 
@@ -577,7 +578,7 @@ public class BaseApiTest extends ConfigTestBase {
   /** Set the proxy globally. */
   protected void setProxy() {
     // RestAssured.proxy("xphxbc02-int.safeway.com", Integer.parseInt("8080"));
-     RestAssured.proxy("xphxbc02-int.safeway.com", Integer.parseInt("8080"));
+    RestAssured.proxy("xphxbc02-int.safeway.com", Integer.parseInt("8080"));
     //RestAssured.proxy("phxproxyvip.safeway.com", Integer.parseInt("8080"));
   }
 
@@ -600,13 +601,13 @@ public class BaseApiTest extends ConfigTestBase {
     Map<String, Object> appAuthData = new HashMap<String, Object>();
     dataExtractor = new DataExtractor();
     appAuthEnvDataJsonObject =
-        dataExtractor.getJSONParseAppAuthenticationData(
-            GlobalConstants.testEnvironment,
-            GlobalConstants.appAuthServiceGroupName,
-            GlobalConstants.appAuthServiceFileName);
+            dataExtractor.getJSONParseAppAuthenticationData(
+                    GlobalConstants.testEnvironment,
+                    GlobalConstants.appAuthServiceGroupName,
+                    GlobalConstants.appAuthServiceFileName);
     appAuthData.put("X-IBM-Client-Id", appAuthEnvDataJsonObject.get("X-IBM-Client-Id").toString());
     appAuthData.put(
-        "X-IBM-Client-Secret", appAuthEnvDataJsonObject.get("X-IBM-Client-Secret").toString());
+            "X-IBM-Client-Secret", appAuthEnvDataJsonObject.get("X-IBM-Client-Secret").toString());
     return appAuthData;
   }
 
@@ -614,6 +615,6 @@ public class BaseApiTest extends ConfigTestBase {
     this.testCaseName=name;
   }
   public String getTestCaseName(){
-   return testCaseName;
+    return testCaseName;
   }
 }

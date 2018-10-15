@@ -6,8 +6,6 @@ import com.safeway.j4u.emju.offers.api.framework.support.common.BaseApiTest;
 import com.safeway.j4u.emju.offers.api.framework.support.constants.GlobalConstants;
 import com.safeway.j4u.emju.offers.api.framework.support.constants.ResourceEndpointUri;
 import com.safeway.j4u.emju.offers.api.framework.support.constants.TestDataFileNames;
-import com.safeway.j4u.emju.offers.api.framework.support.pojo.galleryservices.OfferSearch;
-
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -30,7 +28,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-        /**AUTHOR :: PUSHPAVALLI CHAR **/
+/**AUTHOR :: PUSHPAVALLI CHAR **/
 
 public class ParentChildParams extends BaseApiTest {
 
@@ -53,11 +51,9 @@ public class ParentChildParams extends BaseApiTest {
     @Test()
     @And("^API Response is asserted for counts$")
     public void assertCount(Map<String, Integer> counts){
-        System.out.println(response.getBody());
         int expectedCount = response.jsonPath().getList("offers").size();
-
         int actualCount = Integer.parseInt((counts.get("counts").toString()));;
-        Assert.assertTrue(actualCount>=actualCount);
+        Assert.assertTrue(expectedCount>=actualCount);
     }
     @Test()
     @When("^Business User searches offers using ExternalOfferID$")
@@ -73,11 +69,11 @@ public class ParentChildParams extends BaseApiTest {
         queryParams.put("q", currentTsJsonObject.get("q"));
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         authenticatedGalleryEndpoint +=
-                 ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
+                ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
     }
 
     @When("^Business User searches offers using StoreID$")
-        public void businessUserSearchesOffersUsingStoreID(List<String> methodName) {
+    public void businessUserSearchesOffersUsingStoreID(List<String> methodName) {
         setTestCaseName(methodName.get(0));
         currentTsDataRowsJsonArray =
                 dataExtractor.getJSONParseTestData(
@@ -90,11 +86,11 @@ public class ParentChildParams extends BaseApiTest {
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         headerParams.put(GlobalConstants.CONTENTTYPE, "application/vnd.safeway.v1+json");
         authenticatedGalleryEndpoint +=
-                 ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
+                ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
     }
 
     @When("^Business User searches offers using ZipCode$")
-        public void businessUserSearchesOffersUsingZipCode(List<String> methodName) {
+    public void businessUserSearchesOffersUsingZipCode(List<String> methodName) {
         setTestCaseName(methodName.get(0));
         currentTsDataRowsJsonArray =
                 dataExtractor.getJSONParseTestData(
@@ -106,7 +102,7 @@ public class ParentChildParams extends BaseApiTest {
         queryParams.put("q", currentTsJsonObject.get("q"));
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         authenticatedGalleryEndpoint +=
-                 ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
+                ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
     }
 
     @When("^Business User searches offers using Start Date$")
@@ -122,26 +118,26 @@ public class ParentChildParams extends BaseApiTest {
         queryParams.put("q", currentTsJsonObject.get("q"));
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         authenticatedGalleryEndpoint +=
-                 ResourceEndpointUri.QUERY_DELIMITER +URLEncoder.encode(currentTsJsonObject.get("q").toString(),"UTF-8");
+                ResourceEndpointUri.QUERY_DELIMITER +URLEncoder.encode(currentTsJsonObject.get("q").toString(),"UTF-8");
     }
 
-            @When("^Business User searches offers using End Date$")
+    @When("^Business User searches offers using End Date$")
     public void businessUserSearchesOffersUsingEndDate(List<String> methodName) throws UnsupportedEncodingException {
-                setTestCaseName(methodName.get(0));
-                currentTsDataRowsJsonArray =
-                        dataExtractor.getJSONParseTestData(
-                                GlobalConstants.testEnvironment,
-                                GlobalConstants.currentTestAPIGroupName,
-                                GlobalConstants.currentTestAPI,
-                                getTestCaseName());
-                currentTsJsonObject = (JSONObject) currentTsDataRowsJsonArray.get(0);
-                queryParams.put("q", currentTsJsonObject.get("q"));
-                headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
-                authenticatedGalleryEndpoint +=
-                         ResourceEndpointUri.QUERY_DELIMITER +URLEncoder.encode(currentTsJsonObject.get("q").toString(),"UTF-8");
-            }
+        setTestCaseName(methodName.get(0));
+        currentTsDataRowsJsonArray =
+                dataExtractor.getJSONParseTestData(
+                        GlobalConstants.testEnvironment,
+                        GlobalConstants.currentTestAPIGroupName,
+                        GlobalConstants.currentTestAPI,
+                        getTestCaseName());
+        currentTsJsonObject = (JSONObject) currentTsDataRowsJsonArray.get(0);
+        queryParams.put("q", currentTsJsonObject.get("q"));
+        headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
+        authenticatedGalleryEndpoint +=
+                ResourceEndpointUri.QUERY_DELIMITER +URLEncoder.encode(currentTsJsonObject.get("q").toString(),"UTF-8");
+    }
 
-            @When("^Business User searches offers using Offer Program Code$")
+    @When("^Business User searches offers using Offer Program Code$")
     public void businessUserSearchesOffersUsingOfferProgramCode(List<String> methodName) {
         setTestCaseName(methodName.get(0));
         currentTsDataRowsJsonArray =
@@ -154,7 +150,7 @@ public class ParentChildParams extends BaseApiTest {
         queryParams.put("q", currentTsJsonObject.get("q"));
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         authenticatedGalleryEndpoint +=
-                 ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
+                ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
     }
 
     /*Child Param Test Scenarios*/
@@ -171,7 +167,7 @@ public class ParentChildParams extends BaseApiTest {
         queryParams.put("q", currentTsJsonObject.get("q"));
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         authenticatedGalleryEndpoint +=
-                 ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
+                ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
     }
 
     /*Child Param Test Scenarios*/
@@ -188,7 +184,7 @@ public class ParentChildParams extends BaseApiTest {
         queryParams.put("q", currentTsJsonObject.get("q"));
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         authenticatedGalleryEndpoint +=
-                 ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
+                ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q");
     }
 
     @When("^Business User searches offers using EndDate & Offerstatus$")
@@ -220,6 +216,6 @@ public class ParentChildParams extends BaseApiTest {
         queryParams.put("q", currentTsJsonObject.get("q"));
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         authenticatedGalleryEndpoint +=
-                 ResourceEndpointUri.QUERY_DELIMITER +URLEncoder.encode(currentTsJsonObject.get("q").toString(),"UTF-8");
+                ResourceEndpointUri.QUERY_DELIMITER +URLEncoder.encode(currentTsJsonObject.get("q").toString(),"UTF-8");
     }
 }

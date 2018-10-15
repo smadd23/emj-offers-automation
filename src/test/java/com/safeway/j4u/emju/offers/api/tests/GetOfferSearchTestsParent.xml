@@ -12,7 +12,7 @@
         <!--<parameter name="currentTestEnvironment" value="QA1" />-->
         <classes>
             <!--<class name="com.albertsons.api.tests.offerSearch.GetOfferSearchParentTests"/>-->
-            <class name="com.safeway.j4u.emju.offers.api.offerSearchRunners.RunCukesPCTest"/>
+            <class name="com.safeway.j4u.emju.offers.api.offerSearchRunners.RunCukesTest"/>
         </classes>
     </test>
 </suite>

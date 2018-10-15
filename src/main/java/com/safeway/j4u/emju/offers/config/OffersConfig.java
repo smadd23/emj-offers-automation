@@ -4,9 +4,14 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.nimbusds.oauth2.sdk.ParseException;
+import com.okta.jwt.JwtHelper;
+import com.okta.jwt.JwtVerifier;
+import java.io.IOException;
 import javax.xml.bind.Marshaller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +25,11 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @Slf4j
 public class OffersConfig {
+	
+	@Value("${okta.issuer}")
+	private String oktaIssuer;
+	@Value("${okta.audience}")
+	private String oktaAudiance;
 
 	@Bean
 	public RestTemplate restTemplate() {
@@ -59,4 +69,16 @@ public class OffersConfig {
   public RestTemplateBuilder restTemplateBuilder() {
     return new RestTemplateBuilder(restTemplateCustomCustomizer());
   }
+  
+  @Bean
+  JwtVerifier jwtVerifier() throws IOException, ParseException {
+      return new JwtHelper()
+              .setIssuerUrl(oktaIssuer)
+              .setAudience(oktaAudiance)
+              .setConnectionTimeout(1000)
+              .setReadTimeout(1000)
+              .build();
+  }
+
+  
 }

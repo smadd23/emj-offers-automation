@@ -1,0 +1,31 @@
+---
+spring: 
+  data:
+    cassandra:
+      contact-points: 192.168.99.100
+      port: 32771
+      username: 
+      password:
+      
+offer:
+  external:
+    offerSetup:
+      url: https://nimbus-qi.safeway.com/J4UOffers1/services/offer/promote
+  row:
+    ttl:
+      additionalTtlDays: 10
+  updateStatus:
+    acceptableNumberOfOffers: 1
+  search:
+    query:
+      maxLength: 2000
+      maxPageSize: 100
+      defaultPageSize: 25
+    cursorCache:
+      row:
+        ttl:
+          ttlInMinutes: 60
+          
+okta:
+  issuer: https://abs-qai.oktapreview.com/oauth2/ause38gc8mIZeAkyj0h7     
+

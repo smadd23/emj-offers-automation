@@ -7,6 +7,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+
+import com.safeway.j4u.emju.offers.entity.OfferDetails;
+import com.safeway.j4u.emju.offers.helpers.OfferHelper;
+import com.safeway.j4u.emju.offers.model.PaginatedOffer;
+import com.safeway.j4u.emju.offers.model.ProgramCodeType;
+import com.safeway.j4u.emju.offers.model.StatusType;
+import com.safeway.j4u.emju.offers.repository.OfferDetailsRepository;
+import com.safeway.j4u.emju.offers.service.OfferSearchQueryBuilder;
 import java.util.HashSet;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -22,13 +30,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import com.safeway.j4u.emju.offers.entity.OfferDetails;
-import com.safeway.j4u.emju.offers.helpers.OfferHelper;
-import com.safeway.j4u.emju.offers.model.PaginatedOffer;
-import com.safeway.j4u.emju.offers.model.ProgramCodeType;
-import com.safeway.j4u.emju.offers.model.StatusType;
-import com.safeway.j4u.emju.offers.repository.OfferDetailsRepository;
-import com.safeway.j4u.emju.offers.service.OfferSearchQueryBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -347,7 +348,7 @@ public class OffersSearchEndpointComponentTest {
               is(equalTo(ProgramCodeType.SC)));
 
           assertThat(o.getSid(), is(nullValue()));
-          assertThat(o.getSid(), is(nullValue()));
+          assertThat(o.getCurrent(), is(nullValue()));
         }).verifyComplete();
   }
 
@@ -356,7 +357,7 @@ public class OffersSearchEndpointComponentTest {
 
     Flux<PaginatedOffer> po = this.webClient.get()
         .uri(API_OFFERS_ROOT
-            + "?q=startDt=[2018-07-31T00:00:00Z TO *];endDt=[* TO 2018-08-07T09:00:00Z];limit=2")
+            + "?q=startDt=[2018-07-31T00:00:00Z TO *];endDt=[* TO 2018-08-07T09:00:00Z];limit=1")
         .accept(MediaType.valueOf(APPLICATION_VND_SAFEWAY_V1_JSON))
         .header(HttpHeaders.CONTENT_TYPE, APPLICATION_VND_SAFEWAY_V1_JSON).exchange()
         .returnResult(PaginatedOffer.class).getResponseBody();

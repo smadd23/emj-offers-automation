@@ -8,6 +8,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import com.datastax.driver.core.Statement;
+import com.safeway.j4u.emju.offers.entity.OfferDetails;
+import com.safeway.j4u.emju.offers.mapper.OfferToOfferDetailsMapper;
+import com.safeway.j4u.emju.offers.model.OfferSearchCriteria;
+import com.safeway.j4u.emju.offers.model.SearchCountCriteria;
+import com.safeway.j4u.emju.offers.repository.OfferDetailsRepository;
+import com.safeway.j4u.emju.offers.util.OfferIdGenerator;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,13 +31,6 @@ import org.springframework.data.cassandra.core.convert.CassandraConverter;
 import org.springframework.data.cassandra.core.cql.CqlOperations;
 import org.springframework.data.cassandra.core.cql.ReactiveCqlOperations;
 import org.springframework.web.server.ResponseStatusException;
-import com.datastax.driver.core.Statement;
-import com.safeway.j4u.emju.offers.entity.OfferDetails;
-import com.safeway.j4u.emju.offers.mapper.OfferDetailsMapper;
-import com.safeway.j4u.emju.offers.model.OfferSearchCriteria;
-import com.safeway.j4u.emju.offers.model.SearchCountCriteria;
-import com.safeway.j4u.emju.offers.repository.OfferDetailsRepository;
-import com.safeway.j4u.emju.offers.util.OfferIdGenerator;
 
 @RunWith(MockitoJUnitRunner.class)
 public class OfferSearchServiceUnitTest {
@@ -38,7 +39,7 @@ public class OfferSearchServiceUnitTest {
   private OffersSearchService offerSrchSvc;
 
   @Mock
-  private OfferDetailsMapper offerDetailsMapper;
+  private OfferToOfferDetailsMapper offerDetailsMapper;
 
   @Mock
   private OfferIdGenerator offerIdGenerator;
@@ -63,9 +64,6 @@ public class OfferSearchServiceUnitTest {
 
   @Mock
   private CassandraConverter cassandraConverter;
-
-  @Mock
-  private String aString;
 
   @Value("${offer.search.query.maxPageSize}")
   private int maxPageSize;
@@ -132,7 +130,7 @@ public class OfferSearchServiceUnitTest {
   }
 
   @Test(expected = ResponseStatusException.class)
-  public void searchOffersInvalidCriteriaWithInvalidSearchField() {
+  public void searchOffersInvalidCriteriaWithInvalidSearchField() throws Exception {
 
     String search = "d$1";
     offerSrchSvc.searchOffers(search, new SearchCountCriteria(false, false));
@@ -140,7 +138,7 @@ public class OfferSearchServiceUnitTest {
   }
 
   @Test(expected = ResponseStatusException.class)
-  public void searchOffersInvalidCriteriaWithNoValue() {
+  public void searchOffersInvalidCriteriaWithNoValue() throws Exception {
 
     String search = "externalOfferId";
     offerSrchSvc.searchOffers(search, new SearchCountCriteria(false, false));

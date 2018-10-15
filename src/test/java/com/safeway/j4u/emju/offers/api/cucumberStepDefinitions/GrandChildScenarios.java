@@ -1,22 +1,12 @@
 package com.safeway.j4u.emju.offers.api.cucumberStepDefinitions;
 
-import com.google.appengine.api.urlfetch.HTTPMethod;
 import com.safeway.j4u.emju.offers.api.framework.support.common.BaseApiTest;
 import com.safeway.j4u.emju.offers.api.framework.support.constants.GlobalConstants;
 import com.safeway.j4u.emju.offers.api.framework.support.constants.ResourceEndpointUri;
-import com.safeway.j4u.emju.offers.api.framework.support.pojo.galleryservices.OfferSearch;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.restassured.response.Response;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.apache.http.HttpStatus;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -56,7 +46,7 @@ public class GrandChildScenarios extends BaseApiTest {
         queryParams.put("q", currentTsJsonObject.get("q"));
         headerParams.put(GlobalConstants.CACHECONTROL, "no-cache");
         authenticatedGalleryEndpoint +=
-               ResourceEndpointUri.QUERY_DELIMITER +URLEncoder.encode(currentTsJsonObject.get("q").toString(),"UTF-8");
+                ResourceEndpointUri.QUERY_DELIMITER +URLEncoder.encode(currentTsJsonObject.get("q").toString(),"UTF-8");
     }
 
     @When("^Business User searches offers using OfferStatus, PriceCode and StoreID and ExternalOfferID$")

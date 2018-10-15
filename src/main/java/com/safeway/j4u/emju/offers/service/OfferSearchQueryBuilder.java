@@ -1,13 +1,5 @@
 package com.safeway.j4u.emju.offers.service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 import com.datastax.driver.core.PagingState;
 import com.datastax.driver.core.Statement;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
@@ -16,6 +8,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safeway.j4u.emju.offers.model.OfferSearchCriteria;
 import com.safeway.j4u.emju.offers.model.SolrQuery;
 import com.safeway.j4u.emju.offers.util.OffersConstants;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 @Component
 public class OfferSearchQueryBuilder {
@@ -85,7 +85,7 @@ public class OfferSearchQueryBuilder {
     Select select = QueryBuilder.select().from(OffersConstants.CORE_OFFER_SEARCH_CURSOR_CACHE);
     Select.Where where = select.where();
 
-    where.and(QueryBuilder.eq("solr_query", OffersConstants.CORE_OFFER_SEARCH_ID + ":" + sId));
+    where.and(QueryBuilder.eq(OffersConstants.CORE_OFFER_SEARCH_ID, sId));
     return select;
   }
 

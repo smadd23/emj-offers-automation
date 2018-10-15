@@ -82,6 +82,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-bean-validators</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
@@ -279,6 +285,13 @@
 		</dependency>
 
 		<!-- Automation tests dependencies - end -->
+
+		<!-- okta-jwt-verifier -->
+		<dependency>
+			<groupId>com.okta.jwt</groupId>
+			<artifactId>okta-jwt-verifier</artifactId>
+			<version>0.3.1</version>
+		</dependency>
 
 	</dependencies>
 
@@ -484,7 +497,7 @@
 								</property>
 							</properties>
 							<suiteXmlFiles>
-								<suiteXmlFile>src/test/java/com/safeway/j4u/emju/offers/api/tests/OfferLoad/OfferLoad.xml</suiteXmlFile>
+								<suiteXmlFile>src/test/java/com/safeway/j4u/emju/offers/api/tests/GetOfferSearchTestsParent.xml</suiteXmlFile>
 							</suiteXmlFiles>
 						</configuration>
 					</plugin>

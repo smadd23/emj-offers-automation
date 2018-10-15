@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.datastax.driver.core.Statement;
-import com.safeway.j4u.emju.offers.mapper.OfferDetailsMapper;
+import com.safeway.j4u.emju.offers.mapper.OfferToOfferDetailsMapper;
 import com.safeway.j4u.emju.offers.model.EndDate;
 import com.safeway.j4u.emju.offers.model.Id;
 import com.safeway.j4u.emju.offers.model.Info;
@@ -41,7 +41,7 @@ public class OfferServiceHelperUnitTest {
   private ReactiveCqlOperations reactiveCqlOperations;
 
   @Mock
-  private OfferDetailsMapper offerDetailsMapper;
+  private OfferToOfferDetailsMapper offerDetailsMapper;
 
   private ArgumentCaptor<Offer> offerArgumentCaptor = ArgumentCaptor.forClass(Offer.class);
 

@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class OfferDetailsMapperComponentTest {
 
 	@Autowired
-	private OfferDetailsMapper offerDetailsMapper;
+	private OfferDetailsToOfferMapper offerDetailsToOfferMapper;
 
 	@Before
 	public void before() throws Exception {
@@ -45,7 +45,7 @@ public class OfferDetailsMapperComponentTest {
 					}
 				});
 		
-		Offer destObject = offerDetailsMapper.toOffer(sourceObject);
+		Offer destObject = offerDetailsToOfferMapper.toOffer(sourceObject);
 	}
 
 }

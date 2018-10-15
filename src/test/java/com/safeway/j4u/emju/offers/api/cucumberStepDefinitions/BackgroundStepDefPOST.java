@@ -1,33 +1,33 @@
 package com.safeway.j4u.emju.offers.api.cucumberStepDefinitions;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.appengine.api.urlfetch.HTTPMethod;
 import com.safeway.j4u.emju.offers.api.framework.support.common.BaseApiTest;
 import com.safeway.j4u.emju.offers.api.framework.support.constants.GlobalConstants;
 import com.safeway.j4u.emju.offers.api.framework.support.constants.ResourceEndpointUri;
-import com.safeway.j4u.emju.offers.api.framework.support.pojo.galleryservices.OfferSearch;
-import cucumber.api.PendingException;
+import com.safeway.j4u.emju.offers.model.PaginatedOffer;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java8.En;
-import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BackgroundStepDefPOST extends BaseApiTest {
-    private Map<String, String> env = new HashMap<>();
-    String testCaseName;
-    OfferSearch offerSearchExpected, offerSearchActual;
+  private Map<String, String> env = new HashMap<>();
+  String testCaseName;
 
-    /** Initialize before each test. */
+  /** Initialize before each test. */
   @BeforeClass(alwaysRun = true)
   @Given("^The Test Environment is Defined$")
   public void beforeMethod(Map<String, String> env) throws Exception {
@@ -43,10 +43,13 @@ public class BackgroundStepDefPOST extends BaseApiTest {
   public void parametersAreIntialized() {
     headerParams = new HashMap<String, Object>();
     queryParams = new HashMap<>();
+    pathParams = new HashMap<>();
     authenticatedGalleryEndpoint =
-        dataExtractor.getTestEnvironmentEndPoint(GlobalConstants.testEnvironment);
-    headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-    headerParams.put(GlobalConstants.ACCEPT, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
+            dataExtractor.getTestEnvironmentEndPoint(GlobalConstants.testEnvironment);
+    //Uncomment below for POST Call//
+    //headerParams.put(GlobalConstants.ACCEPT,GlobalConstants.APPLICATION_VND_V1);
+    headerParams.put(GlobalConstants.CACHECONTROL, GlobalConstants.NO_CACHE);
+    headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1);
     authenticatedGalleryEndpoint += ResourceEndpointUri.OFFER_SEARCH;
   }
 
@@ -56,8 +59,11 @@ public class BackgroundStepDefPOST extends BaseApiTest {
     response =
             invokeService(
                     HTTPMethod.POST,
-                    authenticatedGalleryEndpoint,null,
-                    null,headerParams,null,
+                    authenticatedGalleryEndpoint,
+                    null,
+                    null,
+                    headerParams,
+                    null,
                     GlobalConstants.GetCallArgs.HEADERPARAM.toString(),
                     null,
                     bodyFile);
@@ -71,43 +77,41 @@ public class BackgroundStepDefPOST extends BaseApiTest {
   @Then("^API Response is extracted$")
   public void apiResponseIsExtracted() {
     // Need to set Proxy if connected to Safeway Network
-    setProxy();
+    // setProxy();
     setSslConfig();
     // Invoke the service
     response =
             invokeService(
                     HTTPMethod.GET,
-                    authenticatedGalleryEndpoint,null,null,headerParams,null,
+                    authenticatedGalleryEndpoint,
+                    null,
+                    pathParams,
+                    headerParams,
+                    null,
                     GlobalConstants.GetCallArgs.HEADERPARAM.toString(),
                     null,
                     null);
 
   }
-
   @And("^API Response is asserted for Success Status Code$")
   public void assertStatusCodeGet(){
     Assert.assertEquals(response.getStatusCode(),HttpStatus.SC_OK);
   }
+
   @And("^API Response is asserted for ALL attributes$")
-  public void apiResponseIsAssertedForALLAttributes(List<String> fileName){
-    String resourcePath = fileName.get(0);
-    String filePath1 = JSON_RESPONSE_PATH + "offerSearch/"+resourcePath+".json";
-    String filePath2 = null;
-    String expectedJsonString =
-            getComplexJsonAsString(filePath1);
-    offerSearchExpected = stringToPojo(expectedJsonString, OfferSearch.class);
-    String toWrite = response.getBody().asString();
-    try{
-      File tmpFile = File.createTempFile("test", ".json", new File(JSON_RESPONSE_PATH+"offerSearch/"));
-      FileWriter writer = new FileWriter(tmpFile);
-      writer.write(toWrite);
-      writer.close();
-      filePath2 = tmpFile.getAbsolutePath();
-    }catch(Exception e){
-      e.printStackTrace();
-    }
-    String actualJsonString = getComplexJsonAsString(filePath2);
-    offerSearchActual = stringToPojo(actualJsonString,OfferSearch.class);
-    Assert.assertTrue(offerSearchActual.equals(offerSearchExpected));
+  public void apiResponseIsAssertedForALLAttributes(List<String> fileName) throws IOException {
+    String responseFile = fileName.get(0);
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+    mapper.findAndRegisterModules();
+    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
+
+    PaginatedOffer actualPaginatedOffers = mapper.readValue(response.body().asString(), PaginatedOffer.class);
+
+    PaginatedOffer expectedPaginatedOffers = mapper.readValue(new File(JSON_RESPONSE_PATH+"offerSearch/"+responseFile+".json"), PaginatedOffer.class);
+
+    Assert.assertTrue(expectedPaginatedOffers.equals(actualPaginatedOffers));
   }
 }

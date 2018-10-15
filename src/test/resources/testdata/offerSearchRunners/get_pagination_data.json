@@ -1,0 +1,94 @@
+{
+  "dev": {
+    "OfferSearchStoreIdLimitOne": [
+      {
+        "q": "storeId=200200;limit=1"
+      }
+    ],
+    "OfferSearchStoreIdLimitTwo": [
+      {
+        "q": "storeId=200200;limit=2"
+      }
+    ],
+    "OfferSearchStoreIdLimitThree": [
+      {
+        "q": "storeId=200200;limit=3"
+      }
+    ],
+    "OfferSearchStoreIdLimitFour": [
+      {
+        "q": "storeId=200200;limit=4"
+      }
+    ],
+    "OfferSearchStoreIdLimitFive": [
+      {
+        "q": "storeId=200200;limit=5"
+      }
+    ],
+    "OfferSearchStoreIdLimitTen":[
+      {
+        "q": "storeId=200200;limit=10"
+      }
+    ],
+    "OfferSearchOfferStatusLimitFive":[
+      {
+        "q":"offerStatus=A;limit=5"
+      }
+    ],
+    "OfferSearchStartDateLimitFive" :[
+      {
+        "q":"startDt=[2018-08-20T00:00:00Z TO *];limit=5"
+      }
+    ],
+    "OfferSearchEndDateLimitTwenty" :[
+      {
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z];limit=20"
+      }
+    ],
+    "OfferSearchProgramCodeLimitFive" :[
+      {
+        "q":"offerProgramCd=SC;limit=5"
+      }
+    ],
+    "OfferSearchStartDateStoreIdLimitThree" :[
+      {
+        "q":"startDt=[2018-08-20T00:00:00Z TO *];storeId=200200;limit=3"
+      }
+    ],
+    "OfferSearchOfferStatusStoreIdLimitFive":[
+      {
+        "q":"offerStatus=A;storeId=200200;limit=5"
+      }
+    ],
+    "OfferSearchEndDateStoreIdLimitTen" :[
+      {
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z];storeId=200200;limit=10"
+      }
+    ],
+    "OfferSearchStartDateEndDateLimitThree" :[
+      {
+        "q":"startDt=[2018-08-20T00:00:00Z TO *];endDt=[* TO 2018-12-31T09:00:00Z];limit=3"
+      }
+    ],
+    "OfferSearchStoreIdProgramCodeOfferStatusLimitFive":[
+      {
+        "q":"storeId=200200;offerProgramCd=SC;offerStatus=A;limit=5"
+      }
+    ],
+    "OfferSearchStoreIdStartDateOfferStatusLimitFive":[
+      {
+        "q":"storeId=200200;startDt=[2018-08-20T00:00:00Z TO *]offerStatus=A;limit=5"
+      }
+    ],
+    "OfferSearchStoreIdStartDateOfferStatusOfferProgramCodeLimitFive":[
+      {
+        "q":"storeId=200200;startDt=[2018-08-20T00:00:00Z TO *]offerStatus=A;offerProgramCd=SC;limit=5"
+      }
+    ],
+    "OfferSearchStartDateEndDateStoreIdOfferStatusLimitThree":[
+      {
+        "q":"startDt=[2018-08-20T00:00:00Z TO *];endDt=[* TO 2018-12-31T09:00:00Z];storeId=300300;offerStatus=A;limit=3"
+      }
+    ]
+  }
+}

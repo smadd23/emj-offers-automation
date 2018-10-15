@@ -1,13 +1,11 @@
 package com.safeway.j4u.emju.offers.api.framework.support.common;
 
 import static org.testng.AssertJUnit.fail;
-
 import java.io.File;
 import java.io.FileReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import com.safeway.j4u.emju.offers.api.framework.support.constants.GlobalConstants;
 
 /** Created by Kiran on 8/26/2017. */
@@ -29,25 +27,17 @@ public class DataExtractor {
    * @return JSON Array for selected environment
    * @throws Exception
    */
-  public JSONArray getJSONParseTestData(
-      String testEnvironment, String apiGroupName, String apiName, String testScriptName) {
+  public JSONArray getJSONParseTestData(String testEnvironment, String apiGroupName, String apiName,
+      String testScriptName) {
     String filePath = null;
     // Get current OS Name and path for Test Data
     try {
       if (appGeneric.gethostsysos().equalsIgnoreCase("mac")) {
-        filePath =
-            GlobalConstants.testDataFilePathMac
-                + apiGroupName
-                + "//"
-                + apiName.toUpperCase()
-                + ".json";
+        filePath = GlobalConstants.testDataFilePathMac + apiGroupName + "//" + apiName.toUpperCase()
+            + ".json";
       } else if (appGeneric.gethostsysos().equalsIgnoreCase("windows")) {
-        filePath =
-            GlobalConstants.testDataFilePathWindows
-                + apiGroupName
-                + "\\"
-                + apiName.toUpperCase()
-                + ".json";
+        filePath = GlobalConstants.testDataFilePathWindows + apiGroupName + "\\"
+            + apiName.toUpperCase() + ".json";
       } else if ((appGeneric.gethostsysos().equalsIgnoreCase("linux"))
           || (appGeneric.gethostsysos().equalsIgnoreCase("unix"))) {
         filePath = GlobalConstants.testDataFilePathLinux + apiGroupName + "/" + apiName + ".json";
@@ -75,26 +65,18 @@ public class DataExtractor {
    * @return
    * @throws Exception
    */
-  public JSONArray getJSONParseTestDataEnvFree(
-      String apiGroupName, String apiName, String testScriptName) {
+  public JSONArray getJSONParseTestDataEnvFree(String apiGroupName, String apiName,
+      String testScriptName) {
 
     String filePath = null;
     // Get current OS Name and path for Test Data
     try {
       if (appGeneric.gethostsysos().equalsIgnoreCase("mac")) {
-        filePath =
-            GlobalConstants.testDataFilePathMac
-                + apiGroupName
-                + "//"
-                + apiName.toUpperCase()
-                + ".json";
+        filePath = GlobalConstants.testDataFilePathMac + apiGroupName + "//" + apiName.toUpperCase()
+            + ".json";
       } else if (appGeneric.gethostsysos().equalsIgnoreCase("windows")) {
-        filePath =
-            GlobalConstants.testDataFilePathWindows
-                + apiGroupName
-                + "\\"
-                + apiName.toUpperCase()
-                + ".json";
+        filePath = GlobalConstants.testDataFilePathWindows + apiGroupName + "\\"
+            + apiName.toUpperCase() + ".json";
       } else if ((appGeneric.gethostsysos().equalsIgnoreCase("linux"))
           || (appGeneric.gethostsysos().equalsIgnoreCase("unix"))) {
         filePath = GlobalConstants.testDataFilePathLinux + apiGroupName + "/" + apiName + ".json";
@@ -121,25 +103,17 @@ public class DataExtractor {
    * @return
    * @throws Exception
    */
-  public JSONObject getJSONParseTokenTestData(
-      String testEnvironment, String apiGroupName, String apiName) {
+  public JSONObject getJSONParseTokenTestData(String testEnvironment, String apiGroupName,
+      String apiName) {
     try {
       String filePath = null;
       // Get current OS Name and path for Test Data
       if (appGeneric.gethostsysos().equalsIgnoreCase("mac")) {
-        filePath =
-            GlobalConstants.testDataFilePathMac
-                + apiGroupName
-                + "//"
-                + apiName.toUpperCase()
-                + ".json";
+        filePath = GlobalConstants.testDataFilePathMac + apiGroupName + "//" + apiName.toUpperCase()
+            + ".json";
       } else if (appGeneric.gethostsysos().equalsIgnoreCase("windows")) {
-        filePath =
-            GlobalConstants.testDataFilePathWindows
-                + apiGroupName
-                + "\\"
-                + apiName.toUpperCase()
-                + ".json";
+        filePath = GlobalConstants.testDataFilePathWindows + apiGroupName + "\\"
+            + apiName.toUpperCase() + ".json";
       } else if ((appGeneric.gethostsysos().equalsIgnoreCase("linux"))
           || (appGeneric.gethostsysos().equalsIgnoreCase("unix"))) {
         filePath = GlobalConstants.testDataFilePathLinux + apiGroupName + "/" + apiName + ".json";
@@ -158,20 +132,29 @@ public class DataExtractor {
 
   public String getTestEnvironmentEndPoint(String testEnvironment) {
     switch (testEnvironment.toUpperCase()) {
+      case "LOCAL":
+        GlobalConstants.endPoint = "http://localhost:9000/api";
+        GlobalConstants.J4UendPoint = "https://nimbus-qi.safeway.com/J4UProgram1/services/offer";
+        break;
       case "DEV":
         GlobalConstants.endPoint = "https://emju-offers-dev.apps.np.stratus.albertsons.com/api";
+        GlobalConstants.J4UendPoint = "https://nimbus-qi.safeway.com/J4UProgram1/services/offer";
         break;
       case "QAI":
         GlobalConstants.endPoint = "https://nimbus-qi.safeway.com";
+        GlobalConstants.J4UendPoint = "https://nimbus-qi.safeway.com/J4UProgram1/services/offer";
         break;
       case "QA1":
         GlobalConstants.endPoint = "https://api-qa1.safeway.com/abs/qa1pub/web";
+        GlobalConstants.J4UendPoint = "https://nimbus-qa1.safeway.com/J4UProgram1/services/offer";
         break;
       case "QA2":
         GlobalConstants.endPoint = "https://nimbus-qa1.safeway.com";
+        GlobalConstants.J4UendPoint = "https://nimbus-qa2.safeway.com/J4UProgram1/services/offer";
         break;
       case "PERF":
         GlobalConstants.endPoint = "https://nimbus-prf.safeway.com";
+        GlobalConstants.J4UendPoint = "https://nimbus-prf.safeway.com/J4UProgram1/services/offer";
         break;
       case "PROD":
         GlobalConstants.endPoint = "https://api-prod.safeway.com/abs/pub/web";
@@ -188,6 +171,7 @@ public class DataExtractor {
     }
     return GlobalConstants.endPoint;
   }
+
   /**
    * Description: Builds file path based on OS
    *
@@ -196,18 +180,12 @@ public class DataExtractor {
    * @return
    * @throws Exception
    */
-  public File getBodyDataFile(
-      String bodyDataFolderPath, String testEnvironment, String bodyDatafileName) throws Exception {
+  public File getBodyDataFile(String bodyDataFolderPath, String testEnvironment,
+      String bodyDatafileName) throws Exception {
     File bodyDataFile = null;
     try {
-      String bodyDataFilePath =
-          GlobalConstants.testDataFilePathWindows
-              + "\\"
-              + bodyDataFolderPath
-              + "\\"
-              + testEnvironment.toLowerCase()
-              + "\\"
-              + bodyDatafileName;
+      String bodyDataFilePath = GlobalConstants.testDataFilePathWindows + "\\" + bodyDataFolderPath
+          + "\\" + testEnvironment.toLowerCase() + "\\" + bodyDatafileName;
 
       // Get current OS Name and path for Test Data
       if (appGeneric.gethostsysos().equalsIgnoreCase("mac")) {
@@ -226,47 +204,40 @@ public class DataExtractor {
     return (bodyDataFile);
   }
 
-    /**
-     * Description: Get the application authentication (clientID/secret) based on Environment
-     *
-     * @param testEnvironment
-     * @param serviceGroupName
-     * @param serviceFileName
-     * @return
-     * @throws Exception
-     */
-    public JSONObject getJSONParseAppAuthenticationData(
-            String testEnvironment, String serviceGroupName, String serviceFileName) {
-        try {
-            String filePath = null;
-            // Get current OS Name and path for Test Data
-            if (appGeneric.gethostsysos().equalsIgnoreCase("mac")) {
-                filePath =
-                        GlobalConstants.testDataFilePathMac
-                                + serviceGroupName
-                                + "//"
-                                + serviceFileName.toUpperCase()
-                                + ".json";
-            } else if (appGeneric.gethostsysos().equalsIgnoreCase("windows")) {
-                filePath =
-                        GlobalConstants.testDataFilePathWindows
-                                + serviceGroupName
-                                + "\\"
-                                + serviceFileName.toUpperCase()
-                                + ".json";
-            } else if ((appGeneric.gethostsysos().equalsIgnoreCase("linux"))
-                    || (appGeneric.gethostsysos().equalsIgnoreCase("unix"))) {
-                filePath = GlobalConstants.testDataFilePathLinux + serviceGroupName + "/" + serviceFileName + ".json";
-            }
-            // read the json file
-            FileReader reader = new FileReader(filePath);
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
-            // handle a structure into the json object
-            currentEnvAppAuthDataJSONObj = (JSONObject) jsonObject.get(testEnvironment);
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
-        return (currentEnvAppAuthDataJSONObj);
+  /**
+   * Description: Get the application authentication (clientID/secret) based on Environment
+   *
+   * @param testEnvironment
+   * @param serviceGroupName
+   * @param serviceFileName
+   * @return
+   * @throws Exception
+   */
+  public JSONObject getJSONParseAppAuthenticationData(String testEnvironment,
+      String serviceGroupName, String serviceFileName) {
+    try {
+      String filePath = null;
+      // Get current OS Name and path for Test Data
+      if (appGeneric.gethostsysos().equalsIgnoreCase("mac")) {
+        filePath = GlobalConstants.testDataFilePathMac + serviceGroupName + "//"
+            + serviceFileName.toUpperCase() + ".json";
+      } else if (appGeneric.gethostsysos().equalsIgnoreCase("windows")) {
+        filePath = GlobalConstants.testDataFilePathWindows + serviceGroupName + "\\"
+            + serviceFileName.toUpperCase() + ".json";
+      } else if ((appGeneric.gethostsysos().equalsIgnoreCase("linux"))
+          || (appGeneric.gethostsysos().equalsIgnoreCase("unix"))) {
+        filePath = GlobalConstants.testDataFilePathLinux + serviceGroupName + "/" + serviceFileName
+            + ".json";
+      }
+      // read the json file
+      FileReader reader = new FileReader(filePath);
+      JSONParser jsonParser = new JSONParser();
+      JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
+      // handle a structure into the json object
+      currentEnvAppAuthDataJSONObj = (JSONObject) jsonObject.get(testEnvironment);
+    } catch (Exception e) {
+      fail(e.getMessage());
     }
+    return (currentEnvAppAuthDataJSONObj);
+  }
 }

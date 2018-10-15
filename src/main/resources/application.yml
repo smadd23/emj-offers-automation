@@ -1,0 +1,51 @@
+---
+server:
+  port: 9000
+
+management:
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring: 
+  profiles:
+    active:
+    - local
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      adjust-dates-to-context-time-zone: false
+      unwrap-root-value: false
+  data:
+    cassandra:
+      keyspace-name: offers
+      contact-points: ${vcap.services.offers-cassandra-qai.credentials.spring.data.cassandra.contact-points}
+      port: ${vcap.services.offers-cassandra-qai.credentials.spring.data.cassandra.port}
+      username: ${vcap.services.offers-cassandra-qai.credentials.spring.data.cassandra.username}
+      password: ${vcap.services.offers-cassandra-qai.credentials.spring.data.cassandra.password}
+
+offer:
+  row:
+    ttl:
+      additionalTtlDays: 180
+  updateStatus:
+    acceptableNumberOfOffers: 1
+  search:
+    query:
+      maxLength: 2000
+      maxPageSize: 100
+      defaultPageSize: 25
+    cursorCache:
+      row:
+        ttl:
+          ttlInMinutes: 60
+          
+okta:
+  audience: Albertsons
+  read: "*"
+  write: uiOfferPromoter

@@ -90,6 +90,7 @@ public class GlobalConstants {
   public static String CustomerUpdateFormParameterGuid = "GUID";
   public static String CustomerUpdateFormParameterCustomerXml = "CustomerXML";
   public static String endPoint = null;
+  public static String J4UendPoint = null;
   public static String zipCode = "zipcode";
   public static String id = "id";
   public static String brand = "brand";
@@ -103,7 +104,7 @@ public class GlobalConstants {
   public String tokenServiceGroupName = "tokenservice";
   public String tokenServiceApiName = "token_service";
 
-  //Application authentication env
+  // Application authentication env
   public static String appAuthServiceGroupName = "authentication";
   public static String appAuthServiceFileName = "app_authentication";
 
@@ -192,15 +193,11 @@ public class GlobalConstants {
   }
 
   public enum VerifyTextOptions {
-    EXACTMATCH,
-    EXACTMATCHIGNORECASE,
-    PARTIAL
+    EXACTMATCH, EXACTMATCHIGNORECASE, PARTIAL
   }
 
   public enum VerifyValueOptions {
-    EQUALTO,
-    GREATERTHAN,
-    LESSTHAN
+    EQUALTO, GREATERTHAN, LESSTHAN
   }
 
   public enum RegisterNewUserSetting {

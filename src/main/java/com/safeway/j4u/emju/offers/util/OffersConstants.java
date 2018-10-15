@@ -13,10 +13,12 @@ public class OffersConstants {
   public static final String CORE_OFFER_SEARCH_CURSOR_CACHE = "offer_search_cursor_cache";
   public static final String CORE_OFFER_SEARCH_ID = "search_id";
   public static final String COLUMN_HOUSEHOLD_ID = "household_id";
+  public static final String COLUMN_EVENTS = "events";
   public static final String API_OFFERS_ROOT = "/api/offers";
   public static final String APPLICATION_VND_SAFEWAY_V1_JSON = "application/vnd.safeway.v1+json";
   public static final String URL_PATTERN =
       "(\\w+?)(=|<|>|>=|<=)([a-zA-Z0-9_,\\:\\*\\[\\]\\(\\)\\s-]+?);";
+  public static final String LST_UPD_USER_ID_UPDT_OFFER_STATUS = "UpdateOfferStatus";
 
 
 }

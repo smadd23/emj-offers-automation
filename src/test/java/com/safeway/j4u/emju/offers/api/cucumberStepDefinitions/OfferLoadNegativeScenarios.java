@@ -23,12 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 public class OfferLoadNegativeScenarios extends BaseApiTest {
-    private Map<String, String> env;
 
     @When("^Business user loads unsupported data file$")
     public void businesUserLoadsUnSupportedData(List<String> methodName) {
-//        OfferLoadNegativeScenarios obj= new OfferLoadNegativeScenarios();
-//        obj.setTestCaseName(methodName.get(0));
        setTestCaseName(methodName.get(0));
     }
 
@@ -44,13 +41,10 @@ public class OfferLoadNegativeScenarios extends BaseApiTest {
         Assert.assertEquals(response.getStatusCode(), HttpStatus.SC_INTERNAL_SERVER_ERROR);
     }
 
-//    @When("^Business user loads Offer with null AggregateOfferId$")
-//    public void businessUserLoadsOfferwithNullAggregateOfferId(List<String> methodName) {
-//        testCaseName = methodName.get(0);
-//        headerParams.put(GlobalConstants.CONTENTTYPE, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-//        headerParams.put(GlobalConstants.ACCEPT, GlobalConstants.APPLICATION_VND_V1.toUpperCase());
-//        authenticatedGalleryEndpoint += ResourceEndpointUri.OFFER_SEARCH;
-//    }
+    @When("^Business user loads Offer with null AggregateOfferId$")
+    public void businessUserLoadsOfferwithNullAggregateOfferId(List<String> methodName) {
+        setTestCaseName(methodName.get(0));
+    }
     @When("^Business user loads offer with null ExternalOfferId$")
     public void businessUserLoadsDataWithNullExternalOfferId(List<String> methodName) {
         setTestCaseName(methodName.get(0));
@@ -64,14 +58,15 @@ public class OfferLoadNegativeScenarios extends BaseApiTest {
     public void businessUserLoadsDataWithNullProgramCode(List<String> methodName) {
         testCaseName = methodName.get(0);
     }
-//    @When("^Business User loads data with SpecialCharectors for AggregateOfferID$")
-//    public void businessUserLoadsDataWithSpecialCharectorsforAggregateOfferId(List<String> methodName) {
-//        testCaseName = methodName.get(0);
-//    }
-//    @When("^Business User loads data with SpecialCharectors for ExternalOfferID$")
-//    public void businessUserLoadsDataWithSpecialCharectorsforExternalOfferId(List<String> methodName) {
-//        testCaseName = methodName.get(0);
-//    }
+
+    @When("^Business User loads data with SpecialCharectors for AggregateOfferID$")
+    public void businessUserLoadsDataWithSpecialCharectorsforAggregateOfferId(List<String> methodName) {
+        testCaseName = methodName.get(0);
+    }
+    @When("^Business User loads data with SpecialCharectors for ExternalOfferID$")
+    public void businessUserLoadsDataWithSpecialCharectorsforExternalOfferId(List<String> methodName) {
+        testCaseName = methodName.get(0);
+    }
     @When("^Business User loads data  SpecialCharectors for OfferStatus$")
     public void businessUserLoadsDataWithSpecialCharectorsForOfferStatus(List<String> methodName) {
         setTestCaseName(methodName.get(0));

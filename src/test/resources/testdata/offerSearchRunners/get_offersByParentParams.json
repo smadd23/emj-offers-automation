@@ -5,6 +5,11 @@
         "q": "offerStatus=E"
       }
     ],
+    "testGetOfferSearchByOfferStatus2": [
+      {
+        "q": "offerStatus=(A or E)"
+      }
+    ],
     "testGetOfferSearchByOfferId": [
       {
         "q": "offerId=500501"
@@ -12,12 +17,12 @@
     ],
     "testGetOfferSearchByExternalOfferId":[
       {
-        "q": "externalOfferId=NAISC50002680"
+        "q": "externalOfferId=2510N0817H05_830034E"
       }
     ],
     "testGetOfferSearchByPostalCode":[
       {
-        "q": "postalCd=94568"
+        "q": "postalCd=94025"
       }
     ],
     "testGetOfferSearchByStoreId":[
@@ -37,15 +42,15 @@
     ],
     "testGetOfferSearchByOfferProgramCode":[
       {
-      "q":"offerProgramCd=SC"
+        "q":"offerProgramCd=SC"
       }
     ],
     "testGetOfferSearchByZipCodeandStatus":[
-      {"q" : "postalCd=94568;offerStatus=E"}
+      {"q" : "postalCd=94025;offerStatus=A"}
     ],
     "testGetOfferSearchByStartDateandStatus" :[
       {
-        "q":"startDt=[2018-09-01T00:00:00Z TO *];offerStatus=E"
+        "q":"startDt=[2018-09-01T00:00:00Z TO *];offerStatus=A"
       }
     ],
     "testGetOfferSearchByEndDateandStatus" :[
@@ -61,22 +66,22 @@
     ],
     "testGetOfferSearchByExternalOfferIdAndStatusAndProgramCode":[
       {
-        "q":"offerStatus=(A orE);offerProgramCd-SC;externalOfferId=2520W3218_001120"
+        "q":"offerStatus=(A orE);offerProgramCd-SC;externalOfferId=ECOM100346"
       }
     ],
     "testGetOfferSearchByEndDateAndStoreIdAndExternalOfferId":[
       {
-        "q":"endDt=[* TO 2018-12-31T09:00:00Z];externalOfferId=2520W3218_001120;storeId=(1455 or 2655)"
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z];externalOfferId=NAISC-500026408;storeId=(200200 or 300300)"
       }
     ],
-    "testGetOfferSearchByPriceCdAndStoreIdAndOfferStatusAndExternalOfferId":[
+    "testGetOfferSearchByProgramCodeAndStoreIdAndOfferStatusAndExternalOfferId":[
       {
-      "q":"priceCd=20;storeId=(1455 or 2699);offerStatus=(A or E);externalOfferId=2520W3218_001120"
+        "q":"offerProgramCd=SC;externalOfferId=ECOM100331;storeId=(200200 or 300300);offerStatus=A"
       }
     ],
     "testGetOfferSearchByEndDateAndOfferStatus&ExternalOfferIdAndStoreID":[
       {
-        "q":"endDt=[* TO 2018-12-31T09:00:00Z];offerStatus=A;externalOfferId=2520W3218_001120;storeId=(1455 or 2655)"
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z];externalOfferId=NAISC-500026408;offerStatus=(A or E);storeId=(200200 or 300300)"
       }
     ],
     "testGetOfferSearchByNullParameter":[
@@ -91,13 +96,21 @@
     ],
     "testGetOfferSearchByInvalidParameter":[
       {
-        "q":"offerStatus=Q"
+        "q":"offerStatus=&*"
       }
     ],
     "testGetOfferSearchBySpecialCharacters":[
       {
-        "q":"storeId=1455&_fac",
-        "q" :"offerId=99397520&!!",
+        "q":"storeId=1455&_fac"
+      }
+    ],
+    "testGetOfferSearchBySpecialCharacters2":[
+      {
+        "q" :"offerId=99397520&!!"
+      }
+    ],
+    "testGetOfferSearchBySpecialCharacters3":[
+      {
         "q" :"offerStatus=99397520&!!090"
       }
     ],
@@ -111,15 +124,29 @@
         "q":"offerStatus=(Q or ovwhudhahoahdoacjdoi)"
       }
     ],
-    "testGetOfferSearchByUnavailableParameter":[
+    "testGetOfferSearchByUnavailableParameter2":[
       {
-        "q":"externalOfferId=NAISC",
-        "q":"offerProgramCd=OP"
+        "q":"offerProgramCd=89@#"
       }
     ],
     "testGetOfferSearchByWrongParam":[
       {
-        "q":"storeId=14"
+        "q":"storeId=1"
+      }
+    ],
+    "testGetOfferSearchByInvalidPaginationParam1":[
+      {
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z]storeId=1455;limit=2"
+      }
+    ],
+    "testGetOfferSearchByInvalidPaginationParam2" :[
+      {
+        "q":"sid=55a21140-cd81-11e8-921e-e3a2c5783126;next=1?q=sid=55a21140-cd81-11e8-921e-e3a2c5783126;next=2?q=sid=55a21140-cd81-11e8-921e-e3a2c5783126;next=3?q=sid=55a21140-cd81-11e8-921e-e3a2c5783126;next=4?q=sid=55a21140-cd81-11e8-921e-e3a2c5783126;next=5?q=sid=55a21140-cd81-11e8-921e-e3a2c5783126;next=6?q=sid=55a21140-cd81-11e8-921e-e3a2c5783126;next=7"
+      }
+    ],
+    "testGetOfferSearchByInvalidPaginationParam3" :[
+      {
+        "q":"endDt=[* TO 2018-12-31T09:00:00Z]:storeId=1455:limit=2"
       }
     ]
   }

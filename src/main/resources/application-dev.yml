@@ -1,0 +1,7 @@
+offer:
+  external:
+    offerSetup:
+      url: https://nimbus-qi.safeway.com/J4UOffers1/services/offer/promote
+
+okta:
+  issuer: https://abs-qai.oktapreview.com/oauth2/ause38gc8mIZeAkyj0h7

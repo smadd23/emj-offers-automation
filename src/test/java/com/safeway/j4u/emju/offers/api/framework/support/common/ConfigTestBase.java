@@ -1,16 +1,16 @@
 package com.safeway.j4u.emju.offers.api.framework.support.common;
 
-import com.relevantcodes.extentreports.LogStatus;
-import com.safeway.j4u.emju.offers.api.framework.support.constants.GlobalConstants;
-import com.safeway.j4u.emju.offers.api.framework.support.reportgeneration.ExtentManager;
-import com.safeway.j4u.emju.offers.api.framework.support.reportgeneration.ExtentTestManager;
-
-import io.restassured.RestAssured;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
 import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import com.safeway.j4u.emju.offers.api.framework.support.constants.GlobalConstants;
+import com.safeway.j4u.emju.offers.api.framework.support.reportgeneration.ExtentTestManager;
+import io.restassured.RestAssured;
 
 /** Base class with test configuration for environment, test data and reports. */
 public class ConfigTestBase {
@@ -77,16 +77,16 @@ public class ConfigTestBase {
    */
   @AfterMethod
   protected void afterMethod(ITestResult result) {
-//    if (result.getStatus() == ITestResult.FAILURE) {
-//      ExtentTestManager.getTest().log(LogStatus.FAIL, "Test Failed", result.getThrowable());
-//    } else if (result.getStatus() == ITestResult.SKIP) {
-//      ExtentTestManager.getTest().log(LogStatus.SKIP, "Test Skipped", result.getThrowable());
-//    } else {
-//      ExtentTestManager.getTest().log(LogStatus.PASS, "Test Passed", "Test passed");
-//    }
+    // if (result.getStatus() == ITestResult.FAILURE) {
+    // ExtentTestManager.getTest().log(LogStatus.FAIL, "Test Failed", result.getThrowable());
+    // } else if (result.getStatus() == ITestResult.SKIP) {
+    // ExtentTestManager.getTest().log(LogStatus.SKIP, "Test Skipped", result.getThrowable());
+    // } else {
+    // ExtentTestManager.getTest().log(LogStatus.PASS, "Test Passed", "Test passed");
+    // }
 
-//    ExtentManager.getReporter().endTest(ExtentTestManager.getTest());
-//    ExtentManager.getReporter().flush();
+    // ExtentManager.getReporter().endTest(ExtentTestManager.getTest());
+    // ExtentManager.getReporter().flush();
   }
 
   /**

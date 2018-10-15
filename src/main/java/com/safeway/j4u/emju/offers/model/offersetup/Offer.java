@@ -1,15 +1,17 @@
 package com.safeway.j4u.emju.offers.model.offersetup;
 
-import com.migesok.jaxb.adapter.javatime.ZonedDateTimeXmlAdapter;
-import com.safeway.j4u.emju.offers.model.UsageLimitType;
 import java.time.ZonedDateTime;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.migesok.jaxb.adapter.javatime.ZonedDateTimeXmlAdapter;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +29,7 @@ public class Offer {
 	@XmlElement(name="CustomerFriendlyProgramId")
 	private String customerFriendlyProgramId;
 	@XmlElement(name="UsageLimitTypeCode")
-	private UsageLimitType usageLimitTypeCode;
+	private String usageLimitTypeCode;
 	@XmlElement(name="PriceMethodCode")
 	private String priceMethodCode;
 	@XmlElement(name="OfferEffectiveStartDate")
@@ -53,6 +55,10 @@ public class Offer {
 	@XmlElement(name="LastUpdatedTimestamp")
 	@XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
 	private ZonedDateTime lastUpdatedTimestamp;
+	@XmlElement(name="OfferProgramTypeCode")
+	private String offerProgramTypeCode;
+	@XmlElement(name="ShoppingListCFCategoryId")
+	private String shoppingListCFCategoryId;
 	@XmlElement(name="OfferStatusTypeId")
 	private String offerStatusTypeId;
 	@XmlElement(name="LastUpdateUserId")
@@ -69,7 +75,10 @@ public class Offer {
 	@XmlElementWrapper(name="OfferCustomerFriendlyCategories")
 	@XmlElement(name="OfferCustomerFriendlyCategory")
 	private List<OfferCustomerFriendlyCategory> offerCustomerFriendlyCategories;
-	@XmlElementWrapper
-	@XmlElement(name="OfferBanners")
+	@XmlElementWrapper(name="OfferBanners")
+	@XmlElement(name="OfferBanner")
 	private List<OfferBanner> offerBanners;
+	@XmlElementWrapper(name="PromotionalEvents")
+	@XmlElement(name="PromotionalEvent")
+	private List<PromotionalEvent> promotionalEvents;
 }
