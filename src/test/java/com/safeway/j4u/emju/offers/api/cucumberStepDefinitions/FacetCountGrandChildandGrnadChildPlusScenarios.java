@@ -7,13 +7,12 @@ import cucumber.api.java.en.When;
 import org.json.simple.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 public class FacetCountGrandChildandGrnadChildPlusScenarios extends BaseApiTest {
 
 
-    @When("^Business User searches offers using Startdate & OfferProgramcode & offerStatus$")
+    @When("^Business User searches offers using Startdate & OfferProgramcode & offerStatus with facet$")
     public void testGetOfferSearchByStartdateAndOfferProgramCodeAndOfferStatus(List<String> methodName) throws UnsupportedEncodingException {
         setTestCaseName(methodName.get(0));
         currentTsDataRowsJsonArray =
@@ -28,7 +27,7 @@ public class FacetCountGrandChildandGrnadChildPlusScenarios extends BaseApiTest 
                 ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q") + ResourceEndpointUri.FACET_DELIMITER;
     }
 
-    @When("^Business User searches offers using PostalCode and StoreId and Enddate$")
+    @When("^Business User searches offers using PostalCode and StoreId and Enddate with facet$")
     public void testGetOfferSearchByPostalCodeAndStoreIdAndEnddate(List<String> methodName) throws UnsupportedEncodingException {
         setTestCaseName(methodName.get(0));
         currentTsDataRowsJsonArray =
@@ -43,7 +42,7 @@ public class FacetCountGrandChildandGrnadChildPlusScenarios extends BaseApiTest 
                 ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q") + ResourceEndpointUri.FACET_DELIMITER;
     }
 
-    @When("^Business User searches offers using StartDate and EndDate and PostalCd and OfferStatus and StoreId and OfferProgramcode$")
+    @When("^Business User searches offers using StartDate and EndDate and PostalCd and OfferStatus and StoreId and OfferProgramcode with facet$")
     public void testGetOfferSearchByStartDateAndEndDateAndPostalCodeAndOfferStatusAndStoreIdAndOfferProgramcode(List<String> methodName) throws UnsupportedEncodingException {
         setTestCaseName(methodName.get(0));
         currentTsDataRowsJsonArray =

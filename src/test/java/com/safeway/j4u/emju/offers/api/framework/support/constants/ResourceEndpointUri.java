@@ -4,8 +4,6 @@ package com.safeway.j4u.emju.offers.api.framework.support.constants;
 
 public final class ResourceEndpointUri {
   public static final String FACET_DELIMITER = "&includeTotalCount=true&includeFacetCounts=true";
-
-
   public static final String SLASH_DELIMITER = "/";
   public static final String QUERY_DELIMITER = "?q=";
   public static final String GALLERY_CORE = "/J4UProgram1/polaris/services/gallery";
