@@ -19,9 +19,14 @@ import org.testng.annotations.BeforeMethod;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+
+import java.util.Map.Entry;
 
 public class BackgroundStepDefPOST extends BaseApiTest {
   private Map<String, String> env = new HashMap<>();
@@ -113,5 +118,81 @@ public class BackgroundStepDefPOST extends BaseApiTest {
     PaginatedOffer expectedPaginatedOffers = mapper.readValue(new File(JSON_RESPONSE_PATH+"offerSearch/"+responseFile+".json"), PaginatedOffer.class);
 
     Assert.assertTrue(expectedPaginatedOffers.equals(actualPaginatedOffers));
+  }
+  @And("^facetcount for each Category is  asserted against the API response$")
+  public void facetcountforeachcategoryisassertedagainstAPIResponse() {
+    System.out.println(response.getBody());
+
+    ArrayList<HashMap<String, String>> categoriesinoffers =  response.jsonPath().get("offers.info.categories");
+
+    MultiValuedMap<String, String> category = new ArrayListValuedHashMap<>();
+
+    for(HashMap<String, String> categoryValue:categoriesinoffers){
+      categoryValue.remove("9", "Test 1");
+      if (categoryValue.size() > 0) {
+        category.put(categoryValue.entrySet().iterator().next().getValue(), categoryValue.entrySet().iterator().next().getKey());
+      }
+    }
+
+    Map<String, String> facetCount = response.jsonPath().get("facetCounts.categories");
+    facetCount.remove("Test 1");
+
+    int categoryCount = 0;
+    String categoryValue = null;
+    boolean result = true;
+
+    Iterator facetentries = facetCount.entrySet().iterator();
+    while (facetentries.hasNext()) {
+      categoryCount = 0;
+      Map.Entry entry = (Map.Entry) facetentries.next();
+      String fentriesKey = (String) entry.getKey();
+      int fentriesValue = (int) entry.getValue();
+
+      if (fentriesValue == 0) {
+        continue;
+      }
+
+      Collection<Entry<String, String>> collectionEntries = category.entries();
+
+      Iterator<Entry<String, String>> iterator = collectionEntries.iterator();
+
+
+      while(iterator.hasNext()) {
+        Entry<String, String> entry1 = iterator.next();
+        categoryValue = (String) entry1.getKey();
+        if(categoryValue.equalsIgnoreCase(fentriesKey)){
+          categoryCount++;
+        }
+      }
+
+
+      if(categoryCount==fentriesValue){
+        result &= true;
+      }else{
+        result &= false;
+      }
+    }
+
+    Assert.assertTrue(result, "Facet categories are matched in the categories");
+  }
+
+
+  @And("^Category with null count should not be displayed$")
+  public void categoryWithNullcountshouldNotbedisplayed(){
+    HashMap<String, String> count = response.jsonPath().get("facetCounts.categories");
+    boolean result = true;
+
+    Iterator entries = count.entrySet().iterator();
+    while (entries.hasNext()) {
+      Map.Entry entry = (Map.Entry) entries.next();
+      int Value = (int) entry.getValue();
+
+      if(Value == 0){
+        result &= false;
+      }else{
+        result &=true;
+      }
+    }
+    Assert.assertTrue(result, "Category with null value is not displayed");
   }
 }

@@ -7,7 +7,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Parameters are intialized
 
 #   Parent Param Scenarios
-    @ParentParamPagination
     Scenario: StoreId Search with Limit
     Given Business user searches offers using StoreIdAndlimit
       |OfferSearchStoreIdLimitTen|
@@ -21,7 +20,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
       And Previous page search is called One Page at a time
         |LastPage|5|
 
-  @ParentParamPagination
   Scenario: Search by OfferStatus with Limit
     Given Business user searches offers using OfferStatus with limit
       |OfferSearchOfferStatusLimitFive|
@@ -35,7 +33,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|5|
 
-  @ParentParamPagination
   Scenario: Search by StartDate with Limit
     Given Business user searches offers using StartDate with limit
       |OfferSearchStartDateLimitFive|
@@ -49,7 +46,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|4|
 
-  @ParentParamPagination
   Scenario: Search by EndDate with Limit
     Given Business user searches offers using EndDate with limit
       |OfferSearchEndDateLimitTwenty|
@@ -63,7 +59,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|3|
 
-  @ParentParamPagination
   Scenario: Search by OfferProgramCode with Limit
     Given Business user searches offers using Offer Program Code with limit
       |OfferSearchProgramCodeLimitFive|
@@ -78,7 +73,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
       |LastPage|9|
 
 #    Child Param Scenarios
-  @ChildParamPagination
   Scenario: Search by StartDate And StoreId with Limit
     Given Business user searches offers using StartDate And StoreId with limit
       |OfferSearchStartDateStoreIdLimitThree|
@@ -92,7 +86,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|4|
 
-  @ChildParamPagination
   Scenario: Search by StartDate And EndDate with Limit
     Given Business user searches offers using StartDate And EndDate with limit
       |OfferSearchStartDateEndDateLimitThree|
@@ -106,7 +99,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|6|
 
-  @ChildParamPagination
   Scenario: Search by OfferStatus And StoreID with Limit
     Given Business user searches offers using OfferStatus StoreID with limit
       |OfferSearchOfferStatusStoreIdLimitFive|
@@ -120,7 +112,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|5|
 
-  @ChildParamPagination
   Scenario: Search by EndDate And StoreId with Limit
     Given Business user searches offers using EndDate And StoreId with limit
       |OfferSearchEndDateStoreIdLimitTen|
@@ -135,7 +126,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
       |LastPage|6|
 
 #    GrandChild Param Scenarios
-  @GrandChildParamPagination
   Scenario: Search by StoreId ProgramCode and OfferStatus
     Given Business user searches offers using StoreId ProgramCode and OfferStatus with limit
     |OfferSearchStoreIdProgramCodeOfferStatusLimitFive|
@@ -149,7 +139,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|5|
 
-  @GrandChildParamPagination
   Scenario: Search by StoreId StartDate and OfferStatus
     Given Business user searches offers using StoreId StartDate and OfferStatus with limit
       |OfferSearchStoreIdStartDateOfferStatusLimitFive|
@@ -163,7 +152,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|5|
 
-  @GrandChildParamPagination
   Scenario: Search by StoreId StartDate and OfferStatus
     Given Business user searches offers using StoreId StartDate and OfferStatus with limit
       |OfferSearchStoreIdStartDateOfferStatusOfferProgramCodeLimitFive|
@@ -178,8 +166,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
       |LastPage|5|
 
 #  GrandChildPlus Param Scenarios
-
-  @GrandChildPlusParamPagination
   Scenario: Search by StoreId StartDate and OfferStatus and OfferProgramCode
     Given Business user searches offers using StoreId StartDate and OfferStatus with limit
       |OfferSearchStoreIdStartDateOfferStatusOfferProgramCodeLimitFive|
@@ -193,7 +179,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|5|
 
-  @GrandChildPlusParamPagination
   Scenario: Search by StartDate and EndDate and OfferStatus and StoreId
     Given Business user searches offers using StartDate EndDate StoreId and OfferStatus with limit
       |OfferSearchStartDateEndDateStoreIdOfferStatusLimitThree|
@@ -207,7 +192,6 @@ Feature: Offer Search Pagination ALL Positive Test Scenarios
     And Previous page search is called One Page at a time
       |LastPage|4|
 
-    @LimitOnly
   Scenario Outline: StoreID search with limit functionality
     When Business user searches offers using StoreId And <Limit>
     Then API Response is extracted

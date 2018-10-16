@@ -6,7 +6,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
       |apiName|get_offersByParentParams|
     And Parameters are intialized
 
-    @ParentParam
   Scenario: Search offers using offerStatus
     When Business User searches offers using offerStatus
       |testGetOfferSearchByOfferStatus|
@@ -15,7 +14,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for counts
       |counts|1|
 
-  @ParentParam
   Scenario: Search offers using ExternalOfferID
     When Business User searches offers using ExternalOfferID
       |testGetOfferSearchByExternalOfferId|
@@ -24,7 +22,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for counts
       |counts|1|
 
-  @ParentParam
   Scenario: Search offers using StoreID
     When Business User searches offers using StoreID
       |testGetOfferSearchByStoreId|
@@ -33,7 +30,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for counts
       |counts|1|
 
-  @ParentParam
   Scenario: Search offers using ZipCode
     When Business User searches offers using ZipCode
       |testGetOfferSearchByPostalCode|
@@ -42,7 +38,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for counts
       |counts|1|
 
-  @ParentParam
   Scenario: Search offers using Start Date
     When Business User searches offers using Start Date
       |testGetOfferSearchByStartDate|
@@ -51,7 +46,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for counts
       |counts|1|
 
-  @ParentParam
   Scenario: Search offers using End Date
     When Business User searches offers using End Date
       |testGetOfferSearchByEndDate|
@@ -60,7 +54,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for counts
       |counts|1|
 
-  @ParentParam
   Scenario: Search offers using Offer Program Code
     When Business User searches offers using Offer Program Code
       |testGetOfferSearchByOfferProgramCode|
@@ -70,7 +63,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
       |counts|1|
 
 #    Child Param Scenarios
-  @ChildParam
   Scenario: Search offers using ZipCode and offerStatus
     When Business User searches offers using ZipCode & Offerstatus
       |testGetOfferSearchByZipCodeandStatus|
@@ -79,7 +71,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for counts
       |counts|1|
 
-  @ChildParam
   Scenario: Search offers using ExternalOfferId and offerStatus
     When Business User searches offers using ExternalOfferId & Offerstatus
       |testGetOfferSearchByExternalOfferIdandStatus|
@@ -96,7 +87,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for counts
       |counts|1|
 
-  @ChildParam
   Scenario: Search offers using StartDate and offerStatus
     When Business User searches offers using StartDate & Offerstatus
       |testGetOfferSearchByStartDateandStatus|
@@ -107,7 +97,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
 
 #  GrandChild Param Scenarios
 
-  @GrandChildParam
   Scenario: Search offers using ExternalOfferID and StatusCode and ProgramCode
     When Business User searches offers using ExternalOfferID and StatusCode and ProgramCode
       |testGetOfferSearchByExternalOfferIdAndStatusAndProgramCode|
@@ -116,7 +105,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for ALL attributes
       |responseOne|
 
-  @GrandChildParam
   Scenario: Search offers using EndDate and StoreID and ExternalOfferID
     When Business User searches offers using EndDate and StoreID and ExternalOfferID
       |testGetOfferSearchByEndDateAndStoreIdAndExternalOfferId|
@@ -127,7 +115,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
 
 #  GrandChildPlus Param Scenarios
 
-  @GrandChildPlusParam
   Scenario: Search offers using ExternalOfferID, OfferStatus, EndDate & StoreId
     When Business User searches offers ExternalOfferID, OfferStatus, EndDate & StoreId
       |testGetOfferSearchByEndDateAndOfferStatus&ExternalOfferIdAndStoreID|
@@ -136,7 +123,6 @@ Feature: OfferSearch ALL Test Scenarios with "NO AUTH"
     And API Response is asserted for ALL attributes
       |responseThree|
 
-  @GrandChildPlusParam
   Scenario: Search offers using OfferStatus,ProgramCode, StoreID & ExternalOfferID
     When Business User searches offers using OfferStatus, ProgramCode & StoreID & ExternalOfferID
       |testGetOfferSearchByProgramCodeAndStoreIdAndOfferStatusAndExternalOfferId|
