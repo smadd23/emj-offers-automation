@@ -11,7 +11,7 @@ Feature: OfferSearch All Negative Test Scenarios with "NO AUTH"
     When Business User searches offers with No Semicolon in path parameter
       |testGetOfferSearchByInvalidPaginationParam1|
     Then API Response is extracted
-    And  API Response is asserted for Bad Request Status Code
+    And  API Response is asserted for Success Status Code
 
   Scenario: Search offers with Pagination and colon in path parameter
     When Business User searches offers with colon in path parameter
@@ -23,7 +23,7 @@ Feature: OfferSearch All Negative Test Scenarios with "NO AUTH"
     When Business User searches offers with wrong SID in path parameter
       |testGetOfferSearchByInvalidPaginationParam2|
     Then API Response is extracted
-    And  API Response is asserted for Bad Request Status Code
+    And  API Response is asserted for Success Status Code
 
   Scenario: Search offers using null parameters
     When Business User searches offers using No Parameters
@@ -53,7 +53,7 @@ Feature: OfferSearch All Negative Test Scenarios with "NO AUTH"
     When Business User searches offers using Missing Parameters
       |testGetOfferSearchByMissingParamValue|
     Then API Response is extracted
-    And API Response is asserted for Internal Server Error
+    And API Response is asserted for Bad Request Status Code
     And API Response is asserted for User Friendly message
 
   Scenario: Search offers using Special Character values
@@ -66,8 +66,7 @@ Feature: OfferSearch All Negative Test Scenarios with "NO AUTH"
     When Business User searches offers using Lengthy Values
       |testGetOfferSearchByLengthyParam|
     Then API Response is extracted
-    And API Response is asserted for Internal Server Error
-    And API Response is asserted for User Friendly message
+    And API Response is asserted for Success Status Code
 
   Scenario: Search offers using a WRONG StoreID
     When Business User searches offers using WRONG storeID
