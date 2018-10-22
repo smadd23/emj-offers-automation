@@ -39,11 +39,11 @@
     ],
 
     "testGetOfferSearchByStartDateandPostalCode":[
-      {"q" : "startDt=[2018-08-23T00:00:00Z+TO+*];postalCd=95003"}
+      {"q" : "startDt=[2018-11-26T00:00:01.235-07:00+TO+*];postalCd=95003"}
     ],
 
     "testGetOfferSearchByOfferStatusandEnddate":[
-      {"q" : "offerStatus=L;endDt=[*+TO+2018-12-31T00:00:00Z]"}
+      {"q" : "offerStatus=L;endDt=[*+TO+2018-11-16T00:00:01.235-07:00]"}
     ],
     "testGetOfferSearchByEndDateandStartDate" :[
       {
@@ -58,7 +58,7 @@
 
     "testGetOfferSearchByStartdateAndOfferProgramCodeAndOfferStatus":[
       {
-        "q":"offerStatus=L;startDt=[2018-08-23T00:00:00Z+TO+*];offerProgramCd=PD"
+        "q":"offerStatus=L;startDt=[2018-11-26T00:00:01.235-07:00+TO+*];offerProgramCd=PD"
 
       }
     ],
@@ -69,7 +69,7 @@
     ],
     "testGetOfferSearchByStartDateAndEndDateAndPostalCodeAndOfferStatusAndStoreIdAndOfferProgramcode":[
       {
-        "q":"storeId=100200;startDt=[2018-08-23T00:00:00Z+TO+*];endDt=[*+TO+2018-11-16T00:00:01.235];offerStatus=L;postalCd=95003;offerProgramCd=PD"
+        "q":"storeId=100200;startDt=[2018-11-26T00:00:01.235-07:00+TO+*];endDt=[*+TO+2018-11-16T00:00:01.235-07:00];offerStatus=L;postalCd=95003;offerProgramCd=PD"
       }
     ]
   }

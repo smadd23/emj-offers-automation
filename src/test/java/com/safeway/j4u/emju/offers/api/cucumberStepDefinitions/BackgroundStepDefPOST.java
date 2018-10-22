@@ -135,7 +135,9 @@ public class BackgroundStepDefPOST extends BaseApiTest {
     }
 
     Map<String, String> facetCount = response.jsonPath().get("facetCounts.categories");
-    facetCount.remove("Test 1");
+    if(facetCount.containsKey("9::Test 1")) {
+        facetCount.remove("9::Test 1");
+    }
 
     int categoryCount = 0;
     String categoryValue = null;
@@ -146,6 +148,8 @@ public class BackgroundStepDefPOST extends BaseApiTest {
       categoryCount = 0;
       Map.Entry entry = (Map.Entry) facetentries.next();
       String fentriesKey = (String) entry.getKey();
+        String fentriesKeysplit[] = fentriesKey.split("::");
+        String fenterieskeyaftersplit =fentriesKeysplit[1];
       int fentriesValue = (int) entry.getValue();
 
       if (fentriesValue == 0) {
@@ -160,7 +164,7 @@ public class BackgroundStepDefPOST extends BaseApiTest {
       while(iterator.hasNext()) {
         Entry<String, String> entry1 = iterator.next();
         categoryValue = (String) entry1.getKey();
-        if(categoryValue.equalsIgnoreCase(fentriesKey)){
+        if(categoryValue.equalsIgnoreCase(fenterieskeyaftersplit)){
           categoryCount++;
         }
       }

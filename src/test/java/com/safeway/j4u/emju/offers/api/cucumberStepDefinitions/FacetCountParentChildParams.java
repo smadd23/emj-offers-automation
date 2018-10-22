@@ -130,6 +130,7 @@ public void testGetOfferSearchByStartDateandPostalCode(List<String> methodName) 
     queryParams.put("q", currentTsJsonObject.get("q"));
     authenticatedGalleryEndpoint +=
             ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q") + ResourceEndpointUri.FACET_DELIMITER;
+    System.out.println(authenticatedGalleryEndpoint);
 }
 
 
@@ -178,5 +179,9 @@ public void businessUserSearchesOffersUsingStoreIdProgramCode(List<String> metho
             ResourceEndpointUri.QUERY_DELIMITER + currentTsJsonObject.get("q") + ResourceEndpointUri.FACET_DELIMITER;
 }
 
+    @When("^User ([^\"]*) multiple Offers with different categorries$")
+    public void userLoadsMultipleOffersWithDifferentCategorries(String methodName)  {
 
+        testCaseName = methodName;
+    }
 }
